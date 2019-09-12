@@ -52,6 +52,7 @@ class UsersTableSeeder extends Seeder
                 'last_name' => "Mabadeje",
                 'role_id' => $superadmin->_id,
                 'email' => 'superadmin@medom.ng',
+                'role'=>$superadmin->name,
                 'password' => bcrypt('password')
             ],
             ['email' => "superadmin@travellab.ng"]
@@ -59,13 +60,14 @@ class UsersTableSeeder extends Seeder
         User::updateOrCreate(
             [
                 'id' => Uuid::uuid4()->toString(),
-                'first_name' => 'George',
-                'last_name' => "Fabian",
+                'first_name' => 'Dynasty',
+                'last_name' => "Emmanuel",
                 'role_id' => $superadmin->_id,
-                'email' => 'george@travellab.ng',
+                'role'=>$superadmin->name,
+                'email' => 'dynasty@medom.ng',
                 'password' => bcrypt('password')
             ],
-            ['email' => "george@travellab.ng"]
+            ['email' => "dynasty@medom.ng"]
         );
         echo "Seeding Users Finished" . PHP_EOL;
     }
