@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Medom\Modules\Auth\Models\Role;
 use Medom\Modules\Auth\Models\User;
+use Ramsey\Uuid\Uuid;
 
 class UsersTableSeeder extends Seeder
 {
@@ -28,7 +29,7 @@ class UsersTableSeeder extends Seeder
             ['name' => "doctor"]
         );
         Role::updateOrCreate(
-            ['name' => 'secetary', 'display_name' => "HospitalSecetary"],
+            ['_id'=>Uuid::uuid4()->toString(), 'name' => 'secetary', 'display_name' => "HospitalSecetary"],
             ['name' => "secetary"]
         );
         Role::updateOrCreate(
@@ -36,7 +37,7 @@ class UsersTableSeeder extends Seeder
             ['name' => "employee"]
         );
         Role::updateOrCreate(
-            ['name' => 'user', 'display_name' => "Registered User"],
+            ['_id'=>Uuid::uuid4()->toString(), 'name' => 'user', 'display_name' => "Registered User"],
             ['name' => "user"]
         );
         echo "Seeding Roles Finished" . PHP_EOL;
@@ -46,6 +47,7 @@ class UsersTableSeeder extends Seeder
         $superadmin = Role::where('name', 'superadmin')->first();
         User::updateOrCreate(
             [
+                'id' => Uuid::uuid4()->toString(),
                 'first_name' => 'Daniel',
                 'last_name' => "Mabadeje",
                 'role_id' => $superadmin->_id,
@@ -56,6 +58,7 @@ class UsersTableSeeder extends Seeder
         );
         User::updateOrCreate(
             [
+                'id' => Uuid::uuid4()->toString(),
                 'first_name' => 'George',
                 'last_name' => "Fabian",
                 'role_id' => $superadmin->_id,
