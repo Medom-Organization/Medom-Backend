@@ -16,16 +16,16 @@ class UsersTableSeeder extends Seeder
     {
         echo "Seeding Roles Started" . PHP_EOL;
         Role::updateOrCreate(
-            ['name' => 'superadmin', 'display_name' => "Super Administrator"],
+            ['_id'=>Uuid::uuid4()->toString(), 'name' => 'superadmin', 'display_name' => "Super Administrator"],
             ['name' => "superadmin"]
         );
 
         Role::updateOrCreate(
-            ['name' => 'hospital', 'display_name' => "Hospital"],
+            ['_id'=>Uuid::uuid4()->toString(), 'name' => 'hospital', 'display_name' => "Hospital"],
             ['name' => "hospital"]
         );
         Role::updateOrCreate(
-            ['name' => 'doctor', 'display_name' => "Doctor"],
+            ['_id'=>Uuid::uuid4()->toString(), 'name' => 'doctor', 'display_name' => "Doctor"],
             ['name' => "doctor"]
         );
         Role::updateOrCreate(
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
             ['name' => "secetary"]
         );
         Role::updateOrCreate(
-            ['name' => 'employee', 'display_name' => "HospiatalEmployee"],
+            ['_id'=>Uuid::uuid4()->toString(), 'name' => 'employee', 'display_name' => "HospiatalEmployee"],
             ['name' => "employee"]
         );
         Role::updateOrCreate(

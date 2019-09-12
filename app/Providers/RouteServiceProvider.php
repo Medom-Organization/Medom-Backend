@@ -39,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapModuleRoutes();
+
         //
     }
 
@@ -69,5 +71,32 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+    protected function mapModuleRoutes()
+    {
+        $path = base_path('modules/');
+        $pattern = '*'; // All files
+        $dirs = glob($path . $pattern);
+
+
+
+
+        foreach ($dirs as $key => $fullpath) {
+            list($baseDir, $moduleName) = explode($path, $fullpath);
+
+            $routes_path = $fullpath . '/Api/routes.php';
+
+            $versionDirs = glob($fullpath . '/Api/' . $pattern);
+
+            foreach ($versionDirs as $versionPath) {
+
+                $routePath = $versionPath . '/routes.php';
+
+                if (file_exists($routePath))
+                    Route::prefix('api')
+                        ->middleware('api')
+                        ->group($routePath);
+            }
+        }
     }
 }

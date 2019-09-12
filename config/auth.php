@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Medom\User::class,
+            'model' => Medom\Modules\Auth\Models\User::class,
         ],
 
         // 'users' => [
