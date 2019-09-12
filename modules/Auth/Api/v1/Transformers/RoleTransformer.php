@@ -1,9 +1,9 @@
 <?php
 
-namespace Rent\Modules\Auth\Api\v1\Transformers;
+namespace Medom\Modules\Auth\Api\v1\Transformers;
 
 use League\Fractal;
-use Rent\Modules\Auth\Models\Role;
+use Medom\Modules\Auth\Models\Role;
 
 class RoleTransformer extends Fractal\TransformerAbstract
 {
