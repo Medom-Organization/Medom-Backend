@@ -20,12 +20,20 @@ class UsersTableSeeder extends Seeder
         );
 
         Role::updateOrCreate(
-            ['name' => 'admin', 'display_name' => "Administrator"],
-            ['name' => "admin"]
+            ['name' => 'hospital', 'display_name' => "Hospital"],
+            ['name' => "hospital"]
         );
         Role::updateOrCreate(
-            ['name' => 'clientsupport', 'display_name' => "Client Support Executive"],
-            ['name' => "clientsupport"]
+            ['name' => 'doctor', 'display_name' => "Doctor"],
+            ['name' => "doctor"]
+        );
+        Role::updateOrCreate(
+            ['name' => 'secetary', 'display_name' => "HospitalSecetary"],
+            ['name' => "secetary"]
+        );
+        Role::updateOrCreate(
+            ['name' => 'employee', 'display_name' => "HospiatalEmployee"],
+            ['name' => "employee"]
         );
         Role::updateOrCreate(
             ['name' => 'user', 'display_name' => "Registered User"],
@@ -38,10 +46,10 @@ class UsersTableSeeder extends Seeder
         $superadmin = Role::where('name', 'superadmin')->first();
         User::updateOrCreate(
             [
-                'first_name' => 'David',
-                'last_name' => "Inyangetoh",
+                'first_name' => 'Daniel',
+                'last_name' => "Mabadeje",
                 'role_id' => $superadmin->_id,
-                'email' => 'superadmin@travellab.ng',
+                'email' => 'superadmin@medom.ng',
                 'password' => bcrypt('password')
             ],
             ['email' => "superadmin@travellab.ng"]
