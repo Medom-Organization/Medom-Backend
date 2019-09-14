@@ -34,7 +34,7 @@ class UserWelcomeMail extends Mailable
     public function build()
     {
         return $this->
-        subject("Your Travellab Account")
+        subject("Your Medom Account")
         ->view('mails.user-welcome',["user"=>$this->user,"password"=>$this->password]);
     }
 }
