@@ -49,7 +49,7 @@ class AuthController extends BaseController
 
     public function getUserType($email)
     {
-        // $user = $this->authRepo->createUser($request);
+        $user = $this->authRepo->getUserType($email);
     }
     public function registerUser(RegistrationRequest $request)
     {
