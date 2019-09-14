@@ -30,6 +30,7 @@ class AuthController extends BaseController
             return $this->fail("Invalid login credentials");
         }
 
+        $userType=$this->getUserType($request['email']);
         // if
         $data = [
             'token' => $token,
@@ -39,6 +40,10 @@ class AuthController extends BaseController
         return $this->success($data);
     }
 
+    public function getUserType($email)
+    {
+        // $user = $this->authRepo->createUser($request);
+    }
     public function registerUser(RegistrationRequest $request)
     {
         $user = $this->authRepo->createUser($request);
