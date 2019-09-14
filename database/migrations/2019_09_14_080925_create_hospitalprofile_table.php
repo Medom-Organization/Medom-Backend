@@ -19,6 +19,9 @@ class CreateHospitalprofileTable extends Migration
             $table->string('hospital_name');
             $table->string('address');
             $table->string('phone_no');
+            $table->string('national_id');
+            $table->string('logo');
+            $table->string('user_id');
             $table->timestamps();
         });
     }
