@@ -7,6 +7,7 @@ use Medom\Modules\BaseController;
 use Medom\Modules\Auth\Api\v1\Repositories\AuthRepository;
 use Illuminate\Http\Request;
 use Medom\Modules\Auth\Api\v1\Requests\LoginRequest;
+use Medom\Modules\Auth\Api\v1\Requests\RegistrationRequest;
 use Medom\Modules\Auth\Api\v1\Transformers\UserTransformer;
 use Medom\Modules\Auth\Api\v1\Transformers\RoleTransformer;
 
@@ -61,9 +62,9 @@ class AuthController extends BaseController
 
     }
 
-    public function register()
+    public function register(RegistrationRequest $request)
     {
-        //code..
+        $user =$this->authRepo->createUser($request);
     }
     public function getUsers(UserTransformer $transformer)
     {

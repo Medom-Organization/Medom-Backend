@@ -67,6 +67,7 @@ class AuthRepository extends BaseRepository
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'role_id' => $role_id,
+            'role'=>$role->name,
             'password' => bcrypt($data['password'])
         ]);
 
@@ -92,5 +93,9 @@ class AuthRepository extends BaseRepository
         return $user->save()?$user:false;
 
     }
+    // public function register($data){
+        
+
+    // }
 
 }
