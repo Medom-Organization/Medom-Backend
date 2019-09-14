@@ -8,6 +8,7 @@ use Medom\Modules\Auth\Api\v1\Repositories\AuthRepository;
 use Illuminate\Http\Request;
 use Medom\Modules\Auth\Api\v1\Requests\LoginRequest;
 use Medom\Modules\Auth\Api\v1\Requests\RegistrationRequest;
+use Medom\Modules\Auth\Api\v1\Requests\HospitalRegistrationRequest;
 use Medom\Modules\Auth\Api\v1\Transformers\UserTransformer;
 use Medom\Modules\Auth\Api\v1\Transformers\RoleTransformer;
 
@@ -66,10 +67,10 @@ class AuthController extends BaseController
     {
         $user =$this->authRepo->createUser($request);
     }
-    // public function registerHospital(HospitalRegistrationRequest $request)
-    // {
-    //     $user =$this->authRepo->createHospital($request);
-    // }
+    public function registerHospital(HospitalRegistrationRequest $request)
+    {
+        $user =$this->authRepo->createHospital($request);
+    }
     public function getUsers(UserTransformer $transformer)
     {
         $users = $this->authRepo->getUsers();
