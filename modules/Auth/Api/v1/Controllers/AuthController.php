@@ -31,11 +31,18 @@ class AuthController extends BaseController
         }
 
         $userType=$this->getUserType($request['email']);
-        // if
+        if($userType){
+        $data = [
+            'token' => $token,
+            'user' => auth()->user(),
+            'hospital'=>$userType
+        ];
+    }else{
         $data = [
             'token' => $token,
             'user' => auth()->user()
         ];
+    }
 
         return $this->success($data);
     }

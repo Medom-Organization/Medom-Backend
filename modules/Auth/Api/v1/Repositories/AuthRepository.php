@@ -22,6 +22,11 @@ class AuthRepository extends BaseRepository
 
         Mail::to($user->email)->later(now()->addSecond(5),new UserWelcomeMail($user,$password));
     }
+    public function getUserType($email){
+        $user=$this->userModel->where('email', $email);
+        $roleid=$user->roleid;
+        $userid=$user->id;
+    }
 
     public function createUser($data,$role_id=null)
     {
