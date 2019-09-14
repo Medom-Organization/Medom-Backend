@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Mail;
 use Medom\Mail\UserWelcomeMail;
 use Medom\Modules\Auth\Models\Role;
 use Medom\Modules\Auth\Models\User;
+use Medom\Modules\Hospitals\Models\Hospital;
+use Medom\Modules\Hospitals\Models\HospitalStaff;
 use Medom\Modules\BaseRepository;
 
 class AuthRepository extends BaseRepository
@@ -16,6 +18,8 @@ class AuthRepository extends BaseRepository
     {
         $this->roleModel = new Role;
         $this->userModel = new User;
+        $this->hospitalModel = new Hospital;
+        $this->hospitalStaffModel = new HospitalStaff;
     }
 
     public function sendWelcomeEmail($user,$password){
@@ -26,6 +30,7 @@ class AuthRepository extends BaseRepository
         $user=$this->userModel->where('email', $email);
         $roleid=$user->roleid;
         $userid=$user->id;
+        $usertype=$this->hospitalStaffModel->where('user_id', $userid);
     }
 
     public function createUser($data,$role_id=null)
