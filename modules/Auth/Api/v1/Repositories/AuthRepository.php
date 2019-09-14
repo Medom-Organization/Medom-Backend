@@ -18,39 +18,6 @@ class AuthRepository extends BaseRepository
         $this->userModel = new User;
     }
 
-    public function getUsers()
-    {
-        return $this->userModel->get();
-    }
-
-    public function getUserByEmail($email)
-    {
-        $user = $this->userModel->where('email',$email)->first();
-        return $user;
-    }
-
-    public function getRoles()
-    {
-        return $this->roleModel->get();
-    }
-
-    public function createAdmin($data)
-    {
-        $user = $this->userModel->create([
-            'email' => $data['email'],
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'role_id' => $data['role'],
-            'password' => bcrypt('password')
-        ]);
-        
-        if(!$user)
-            return false;
-        
-        return $user;
-    }
-
-
     public function sendWelcomeEmail($user,$password){
 
         Mail::to($user->email)->later(now()->addSecond(5),new UserWelcomeMail($user,$password));

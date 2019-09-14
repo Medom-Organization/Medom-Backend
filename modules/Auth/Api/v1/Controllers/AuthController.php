@@ -40,29 +40,6 @@ class AuthController extends BaseController
 
     }
 
-    public function addSuperAdmin(Request $request)
-    {        
-        $this->validate($request,[
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'role' => 'required'
-        ]);
-
-        $data = $request->all();
-        $user = $this->authRepo->createAdmin($data);
-        
-        if ($user) {
-            # code...
-        }
-        $data = [
-            'message' => 'Admin Added Successful',
-        ];
-
-        return $this->success($data);
-
-    }
-
     public function registerUser(RegistrationRequest $request)
     {
         $user =$this->authRepo->createUser($request);
@@ -71,18 +48,6 @@ class AuthController extends BaseController
     {
         $user =$this->authRepo->createHospital($request);
     }
-    public function getUsers(UserTransformer $transformer)
-    {
-        $users = $this->authRepo->getUsers();
-        return $this->transform($users,$transformer);
-    }
-
-    public function getRoles(RoleTransformer $transformer)
-    {
-        $roles = $this->authRepo->getRoles();
-        return $this->transform($roles, $transformer);
-    }
-
 
     public function updateProfile(UpdateProfileRequest $request){
 

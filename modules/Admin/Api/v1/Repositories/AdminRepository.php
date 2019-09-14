@@ -149,4 +149,22 @@ class AdminRepository extends BaseRepository
         }
         return response()->json(["status" => "success",  "transactions"=>$transactions, "users"=>$users, "chart"=>["bookings" => $bookingmetrics, "payments" => $paymentmetrics]]);
     }
+
+    public function createAdmin($data)
+    {
+        $user = $this->userModel->create([
+            'email' => $data['email'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'role_id' => $data['role'],
+            'password' => bcrypt('password')
+        ]);
+        
+        if(!$user)
+            return false;
+        
+        return $user;
+    }
+
+
 }

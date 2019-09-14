@@ -116,4 +116,27 @@ class AdminController extends BaseController
             return $this->error("An error occured");
         }
     }
+    public function addSuperAdmin(Request $request)
+    {        
+        $this->validate($request,[
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'role' => 'required'
+        ]);
+
+        $data = $request->all();
+        $user = $this->authRepo->createAdmin($data);
+        
+        if ($user) {
+            # code...
+        }
+        $data = [
+            'message' => 'Admin Added Successful',
+        ];
+
+        return $this->success($data);
+
+    }
+
 }
