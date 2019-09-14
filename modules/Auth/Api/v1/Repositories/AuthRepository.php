@@ -79,6 +79,29 @@ class AuthRepository extends BaseRepository
 
     }
 
+    public function createHospital($data,$role_id=null)
+    {
+        if(!$role_id){
+            $role = $this->roleModel->where('name','hospital')->first();
+            $role_id = $role->id;
+        }
+        $user = $this->userModel->create([
+            'email' => $data['email'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'role_id' => $role_id,
+            'role'=>$role->name,
+            'password' => bcrypt($data['password'])
+        ]);
+
+        if(!$user)
+            return false;
+
+        $this->sendWelcomeEmail($user,$data['password']);
+        return $user;
+
+    }
+
 
 
     public function updateAccount($data){

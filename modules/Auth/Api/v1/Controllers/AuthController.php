@@ -62,10 +62,14 @@ class AuthController extends BaseController
 
     }
 
-    public function register(RegistrationRequest $request)
+    public function registerUser(RegistrationRequest $request)
     {
         $user =$this->authRepo->createUser($request);
     }
+    // public function registerHospital(HospitalRegistrationRequest $request)
+    // {
+    //     $user =$this->authRepo->createHospital($request);
+    // }
     public function getUsers(UserTransformer $transformer)
     {
         $users = $this->authRepo->getUsers();
