@@ -31,6 +31,12 @@ class AuthRepository extends BaseRepository
         $roleid=$user->roleid;
         $userid=$user->id;
         $usertype=$this->hospitalStaffModel->where('user_id', $userid);
+        if($usertype){
+            $hospital[]=$this->hospitalModel->where('id', $usertype->id);
+            return $hospital;
+        }else{
+            return false;
+        }
     }
 
     public function createUser($data,$role_id=null)
