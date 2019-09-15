@@ -27,7 +27,11 @@ class HospitalRegistrationRequest extends FormRequest
             'first_name'=>'required',
             'last_name'=>'required',
             'email'=>'required|email',
-            'password'=>'required'
+            'password'=>'required',
+            'hospitalemail'=>'required|email',
+            'address'=>'required',
+            'phone_no'=>'required',
+            'certificate_no'=>'required',
         ];
     }
 

@@ -62,7 +62,7 @@ class AuthRepository extends BaseRepository
 
     }
 
-    public function createHospital($data,$role_id=null)
+    public function createHospital($data,$profile_picture,$logo,$role_id=null)
     {
         if(!$role_id){
             $role = $this->roleModel->where('name','hospitaladmin')->first();
@@ -75,7 +75,8 @@ class AuthRepository extends BaseRepository
             'last_name' => $data['last_name'],
             'role_id' => $role_id,
             'role'=>$role->name,
-            'password' => bcrypt($data['password'])
+            'password' => bcrypt($data['password']),
+            'profile_picture'=>$profile_picture
         ]);
         $hospital=$this->hospitalModel->create([
             'id'=>$this->generateUuid(),
@@ -84,7 +85,7 @@ class AuthRepository extends BaseRepository
             'address'=>$data['address'],
             'phone_no'=>$data['phone_no'],
             'certificate_no'=>$data['certificate_no'],
-            'logo'=>$data['logo'],
+            'logo'=>$logo,
             'user_id'=>$user->id
         ]);
         $hospitalstaff=$this->hospitalStaffModel->create([

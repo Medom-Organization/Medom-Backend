@@ -53,7 +53,22 @@ class AuthController extends BaseController
     }
     public function registerUser(RegistrationRequest $request)
     {
-        $user = $this->authRepo->createUser($request);
+        
+        $this->validate($request, [
+
+            // 'po' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+
+        ]);
+        // if(count($request->photo)>4){
+        //     return $this->error("Upload must not be more than 4");
+        // }else{
+
+        // foreach ($request->photo as $photo) {
+            $profile_picture=$request->profile_picture->store('Profiles');
+            $logo = $request->logo->store('logos');
+        // }
+        $user = $this->authRepo->createUser($request, $profile_picture, $logo);
     }
     public function registerHospital(HospitalRegistrationRequest $request)
     {
