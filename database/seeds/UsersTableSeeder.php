@@ -21,8 +21,8 @@ class UsersTableSeeder extends Seeder
         );
 
         Role::updateOrCreate(
-            ['_id'=>Uuid::uuid4()->toString(), 'name' => 'hospital', 'display_name' => "Hospital"],
-            ['name' => "hospital"]
+            ['_id'=>Uuid::uuid4()->toString(), 'name' => 'hospitaladmin', 'display_name' => "Hospital"],
+            ['name' => "hospitaladmin"]
         );
         Role::updateOrCreate(
             ['_id'=>Uuid::uuid4()->toString(), 'name' => 'doctor', 'display_name' => "Doctor"],
