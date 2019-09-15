@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Medom\Mail\UserWelcomeMail;
 use Medom\Modules\Auth\Models\Role;
 use Medom\Modules\Auth\Models\User;
-use Medom\Modules\Hospitals\Models\Hospital;
+use Medom\Modules\Hospitals\Models\Hospitals;
 use Medom\Modules\Hospitals\Models\HospitalStaff;
 use Medom\Modules\BaseRepository;
 
@@ -18,7 +18,7 @@ class AuthRepository extends BaseRepository
     {
         $this->roleModel = new Role;
         $this->userModel = new User;
-        $this->hospitalModel = new Hospital;
+        $this->hospitalModel = new Hospitals;
         $this->hospitalStaffModel = new HospitalStaff;
     }
 

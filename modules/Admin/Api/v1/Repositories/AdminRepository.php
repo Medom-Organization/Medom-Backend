@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Mail;
 use Medom\Mail\UserWelcomeMail;
 use Medom\Modules\Auth\Models\Role;
 use Medom\Modules\Auth\Models\User;
-use Medom\Modules\Booking\Models\Order;
-use Medom\Modules\Booking\Models\Payment;
+// use Medom\Modules\Booking\Models\Order;
+// use Medom\Modules\Booking\Models\Payment;
 use Medom\Modules\BaseRepository;
 use Carbon\Carbon;
 
@@ -19,8 +19,8 @@ class AdminRepository extends BaseRepository
     {
         $this->roleModel = new Role;
         $this->userModel = new User;
-        $this->orderModel = new Order;
-        $this->paymentModel = new Payment;
+        // $this->orderModel = new Order;
+        // $this->paymentModel = new Payment;
     }
 
     public function getUsers()
