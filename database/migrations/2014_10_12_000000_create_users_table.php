@@ -26,6 +26,10 @@ class CreateUsersTable extends Migration
             $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
+        Schema::table('users', function ($table) {
+            $table->engine = 'InnoDB';
+            $table->foreign('role_id')->references('_id')->on('roles')->onDelete('cascade');
+        });
     }
 
     /**
