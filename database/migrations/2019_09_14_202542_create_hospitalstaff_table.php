@@ -14,12 +14,19 @@ class CreateHospitalstaffTable extends Migration
     public function up()
     {
         Schema::create('hospitalstaff', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->primary('id');
-            $table->primary('user_id');
+            $table->string('user_id');
             $table->string('hospital_id');
             $table->string('role_id');
             $table->timestamps();
+        });
+        Schema::table('hospitalstaff', function ($table) {
+            $table->engine = 'InnoDB';
+            $table->foreign('role_id')->references('_id')->on('roles')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
         });
     }
 

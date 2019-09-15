@@ -26,6 +26,10 @@ class CreateHospitalsTable extends Migration
             $table->string('user_id');
             $table->timestamps();
         });
+        Schema::table('hospitals', function ($table) {
+            $table->engine = 'InnoDB';
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
