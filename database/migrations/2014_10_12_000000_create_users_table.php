@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone_number')->nullable();
             $table->string('role');
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,10 @@ class CreateHospitalstaffTable extends Migration
     {
         Schema::create('hospitalstaff', function (Blueprint $table) {
             $table->increments('id');
+            $table->primary('id');
+            $table->primary('user_id');
+            $table->string('hospital_id');
+            $table->string('role_id');
             $table->timestamps();
         });
     }
