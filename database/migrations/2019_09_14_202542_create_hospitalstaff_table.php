@@ -16,7 +16,6 @@ class CreateHospitalstaffTable extends Migration
         Schema::create('hospitalstaff', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->primary('id');
             $table->string('user_id');
             $table->string('hospital_id');
             $table->string('role_id');
