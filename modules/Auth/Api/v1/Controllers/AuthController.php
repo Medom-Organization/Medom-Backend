@@ -66,13 +66,20 @@ class AuthController extends BaseController
 
         // foreach ($request->photo as $photo) {
             $profile_picture=$request->profile_picture->store('Profiles');
-            $logo = $request->logo->store('logos');
         // }
-        $user = $this->authRepo->createUser($request, $profile_picture, $logo);
+        $user = $this->authRepo->createUser($request, $profile_picture);
     }
     public function registerHospital(HospitalRegistrationRequest $request)
     {
-        $user = $this->authRepo->createHospital($request);
+        $this->validate($request, [
+
+            // 'po' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+
+        ]);
+        $profile_picture=$request->profile_picture->store('Profiles');
+        $logo = $request->logo->store('logos');
+        $user = $this->authRepo->createHospital($request, $profile_picture, $logo);
     }
 
     public function updateProfile(UpdateProfileRequest $request)
