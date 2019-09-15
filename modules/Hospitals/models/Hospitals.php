@@ -1,6 +1,6 @@
 <?php
 
-namespace Medom\Modules\Auth\Models;
+namespace Medom\Modules\Hospitals\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

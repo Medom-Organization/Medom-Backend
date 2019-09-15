@@ -1,6 +1,6 @@
 <?php
 
-namespace Medom\Modules\Auth\Models;
+namespace Medom\Modules\Hospitals\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,5 +13,5 @@ class HospitalStaff extends Model
      *
      * @var array
      */
-    protected $fillable = ['_id', 'name', 'display_name', "description"];
+    protected $fillable = ['user_id', 'hospital_id', 'role_id'];
 }
