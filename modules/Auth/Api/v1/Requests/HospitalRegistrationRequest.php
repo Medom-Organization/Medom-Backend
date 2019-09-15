@@ -28,6 +28,7 @@ class HospitalRegistrationRequest extends FormRequest
             'last_name'=>'required',
             'email'=>'required|email',
             'password'=>'required',
+            'hospitalname'=>'required',
             'hospitalemail'=>'required|email',
             'address'=>'required',
             'phone_no'=>'required',

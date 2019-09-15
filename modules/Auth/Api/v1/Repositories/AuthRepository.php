@@ -43,7 +43,7 @@ class AuthRepository extends BaseRepository
     {
         if(!$role_id){
             $role = $this->roleModel->where('name','user')->first();
-            $role_id = $role->id;
+            $role_id = $role->_id;
         }
         $user = $this->userModel->create([
             'id'=>$this->generateUuid(),
@@ -68,10 +68,10 @@ class AuthRepository extends BaseRepository
     {
         if(!$role_id){
             $role = $this->roleModel->where('name', 'hospitaladmin')->first();
-            $role_id = $role->id;
+            $role_id = $role->_id;
         }
-        $user = $this->userModel->create([
-            'id'=>$this->generateUuid(),
+        $user = User::create([
+            "id"=>$this->generateUuid(),
             'email' => $data['email'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -80,9 +80,10 @@ class AuthRepository extends BaseRepository
             'password' => bcrypt($data['password']),
             'profile_picture'=>$profile_picture
         ]);
+        dd($user->id);
         $hospital=$this->hospitalModel->create([
             'id'=>$this->generateUuid(),
-            'email'=>$data['hospital_email'],
+            'email'=>$data['hospitalemail'],
             'hospital_name'=>$data['hospitalname'],
             'address'=>$data['address'],
             'phone_no'=>$data['phone_no'],
