@@ -13,13 +13,8 @@ $api->version('v1', [], function ($api) {
                 return json_encode(['status' => 'Success', 'message' => 'Auth Api working']);
             });
             $api->post('/login', 'AuthController@login');
-            // $api->group(['prefix' => 'admin'], function () use ($api) {
-            //     $api->post('/login', 'AuthController@login');
-            //     $api->get('/users', 'AuthController@getUsers');
-            //     $api->get('/roles', 'AuthController@getRoles');
-            //     $api->post('/addemployee', 'AuthController@addEmployee');
-            //     $api->post('/update/profile', 'AuthController@updateProfile')->middleware('auth:api');
-            // });
+            $api->post('/user/register', 'AuthController@registerUser');
+            $api->post('/hospital/register', 'AuthController@registerHospital');
         });
     });
 
