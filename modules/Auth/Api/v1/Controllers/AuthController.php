@@ -67,12 +67,18 @@ class AuthController extends BaseController
     {
         $this->validate($request, [
 
-            // 'po' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000'
 
         ]);
+        // foreach ($request->profile_picture as $photo) {
         $profile_picture=$request->profile_picture->store('Profiles');
+        // $profile_picture=$photo->store('Profiles');
+        // }
+        // foreach ($request->logo as $photo) {
         $logo = $request->logo->store('logos');
+        // $logo = $photo->store('logos');
+        // }
         $user = $this->authRepo->createHospital($request, $profile_picture, $logo);
     }
 

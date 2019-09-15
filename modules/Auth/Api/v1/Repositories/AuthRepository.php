@@ -64,10 +64,10 @@ class AuthRepository extends BaseRepository
 
     }
 
-    public function createHospital($data,$profile_picture,$logo,$role_id=null)
+    public function createHospital($data, $profile_picture, $logo,$role_id=null)
     {
         if(!$role_id){
-            $role = $this->roleModel->where('name','hospitaladmin')->first();
+            $role = $this->roleModel->where('name', 'hospitaladmin')->first();
             $role_id = $role->id;
         }
         $user = $this->userModel->create([
