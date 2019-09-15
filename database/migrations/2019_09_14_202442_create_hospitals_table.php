@@ -21,7 +21,7 @@ class CreateHospitalsTable extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('phone_no');
-            $table->string('national_id');
+            $table->string('certificate_no');
             $table->string('logo');
             $table->string('user_id');
             $table->timestamps();
