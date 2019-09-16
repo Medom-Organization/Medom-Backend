@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Travellab\Modules\Auth\Models\User;
+use Medom\Modules\Auth\Models\User;
 
 
 class UserWelcomeMail extends Mailable

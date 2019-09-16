@@ -93,9 +93,9 @@ class AuthRepository extends BaseRepository
                 'logo' => $logo,
                 'user_id' => $user->uid
             ]);
-            $hospitalstaff = $this->hospitalStaffModel->updateOrCreate([
-                'user_id' => $user->id,
-                'hospital_id' => $hospital->id,
+            $hospitalstaff = $this->hospitalStaffModel->create([
+                'user_id' => $user->uid,
+                'hospital_id' => $hospital->hospital_id,
                 'role_id' => $role_id
             ]);
         }

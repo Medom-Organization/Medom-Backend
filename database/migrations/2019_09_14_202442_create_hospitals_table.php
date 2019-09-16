@@ -17,11 +17,11 @@ class CreateHospitalsTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('hospital_id');
             $table->primary('hospital_id');
-            $table->string('hospital_name');
-            $table->string('email');
+            $table->string('hospital_name')->unique();
+            $table->string('email')->unique();
             $table->string('address');
             $table->string('phone_no');
-            $table->string('certificate_no');
+            $table->string('certificate_no')->unique();
             $table->string('logo');
             $table->string('user_id');
             $table->timestamps();
