@@ -71,8 +71,8 @@ class AuthRepository extends BaseRepository
             $role = $this->roleModel->where('name', 'hospitaladmin')->first();
             $role_id = $role->_id;
         }
-        $user = $this->userModel->create([
-            'id' => $this->generateUuid(),
+        $user = $this->userModel->updateOrCreate([
+            'uid' => $this->generateUuid(),
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
@@ -81,12 +81,13 @@ class AuthRepository extends BaseRepository
             'role' => $role->name,
             'profile_picture' => $profile_picture
         ]);
-        // dd($user->id);
+        // dd($user->uid);
         // dd($user);
-        $user_id=$this->userModel->where('email', $user->email)->get();
-        dd($user_id->id);
+        // $user_id = $this->userModel->where('email', $user->email)->select('id')->get();
+        // dd($user_id);
+        // return $user_id;
 
-        return $user;
+        // return $user;
         if ($user) {
             $hospital = $this->hospitalModel->create([
                 'id' => $this->generateUuid(),
@@ -96,7 +97,7 @@ class AuthRepository extends BaseRepository
                 'phone_no' => $data['phone_no'],
                 'certificate_no' => $data['certificate_no'],
                 'logo' => $logo,
-                'user_id' => $user->id
+                'user_id' => $user->uid
             ]);
             // dd($user->id);
             $hospitalstaff = $this->hospitalStaffModel->create([

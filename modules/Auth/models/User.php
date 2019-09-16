@@ -1,4 +1,5 @@
 <?php
+
 namespace Medom\Modules\Auth\Models;
 
 use Illuminate\Auth\Authenticatable;
@@ -26,7 +27,7 @@ class User extends Model implements
      * @var array
      */
 
-    protected $fillable = ['id', 'first_name', 'last_name', 'email', 'role_id', 'password', 'role', 'profile_picture'];
+    protected $fillable = ['uid', 'first_name', 'last_name', 'email', 'role_id', 'password', 'role', 'profile_picture'];
     protected $hidden = ['password'];
     protected $with = ['role'];
 

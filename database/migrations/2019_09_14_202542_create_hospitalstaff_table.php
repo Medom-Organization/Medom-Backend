@@ -21,10 +21,10 @@ class CreateHospitalstaffTable extends Migration
             $table->string('role_id');
             $table->timestamps();
         });
-        Schema::table('hospitalstaff', function ($table) {
+        Schema::table('hospitalstaffs', function ($table) {
             $table->engine = 'InnoDB';
             $table->foreign('role_id')->references('_id')->on('roles')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('uid')->on('users')->onDelete('cascade');
             $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
         });
     }
