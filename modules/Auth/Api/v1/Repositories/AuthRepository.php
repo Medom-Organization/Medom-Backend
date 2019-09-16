@@ -102,7 +102,7 @@ class AuthRepository extends BaseRepository
         if (!$user)
             return false;
 
-        $this->sendWelcomeEmail($user, $data['password']);
+        // $this->sendWelcomeEmail($user, $data['password']);
         return array('user' => $user, 'hospital' => $hospital);
     }
 
