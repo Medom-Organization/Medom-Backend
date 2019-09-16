@@ -13,7 +13,7 @@ class CreateHospitalstaffTable extends Migration
      */
     public function up()
     {
-        Schema::create('hospitalstaff', function (Blueprint $table) {
+        Schema::create('hospitalstaffs', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('user_id');
