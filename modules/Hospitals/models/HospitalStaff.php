@@ -5,7 +5,7 @@ namespace Medom\Modules\Hospitals\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class HospitalStaff extends Model
+class Hospitalstaff extends Model
 {
 
     /**

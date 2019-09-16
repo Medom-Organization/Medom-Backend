@@ -15,8 +15,8 @@ class CreateHospitalsTable extends Migration
     {
         Schema::create('hospitals', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('id');
-            $table->primary('id');
+            $table->string('hospital_id');
+            $table->primary('hospital_id');
             $table->string('hospital_name');
             $table->string('email');
             $table->string('address');
