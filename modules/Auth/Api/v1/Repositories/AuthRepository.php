@@ -84,7 +84,7 @@ class AuthRepository extends BaseRepository
     
         if ($user) {
             $hospital = $this->hospitalModel->updateOrCreate([
-                'id' => $this->generateUuid(),
+                'hospital_id' => $this->generateUuid(),
                 'email' => $data['hospitalemail'],
                 'hospital_name' => $data['hospitalname'],
                 'address' => $data['address'],
@@ -95,7 +95,7 @@ class AuthRepository extends BaseRepository
             ]);
             $hospitalstaff = $this->hospitalStaffModel->updateOrCreate([
                 'user_id' => $user->id,
-                'hospital' => $hospital->id,
+                'hospital_id' => $hospital->id,
                 'role_id' => $role_id
             ]);
         }
