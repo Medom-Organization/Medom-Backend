@@ -22,105 +22,112 @@ class AuthRepository extends BaseRepository
         $this->hospitalStaffModel = new HospitalStaff;
     }
 
-    public function sendWelcomeEmail($user,$password){
+    public function sendWelcomeEmail($user, $password)
+    {
 
-        Mail::to($user->email)->later(now()->addSecond(5),new UserWelcomeMail($user,$password));
+        Mail::to($user->email)->later(now()->addSecond(5), new UserWelcomeMail($user, $password));
     }
-    public function getUserType($email){
-        $user=$this->userModel->where('email', $email);
-        $roleid=$user->roleid;
-        $userid=$user->id;
-        $usertype=$this->hospitalStaffModel->where('user_id', $userid);
-        if($usertype){
-            $hospital[]=$this->hospitalModel->where('id', $usertype->id);
+    public function getUserType($email)
+    {
+        $user = $this->userModel->where('email', $email);
+        $roleid = $user->roleid;
+        $userid = $user->id;
+        $usertype = $this->hospitalStaffModel->where('user_id', $userid);
+        if ($usertype) {
+            $hospital[] = $this->hospitalModel->where('id', $usertype->id);
             return $hospital;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function createUser($data,$profile_picture,$role_id=null)
+    public function createUser($data, $profile_picture, $role_id = null)
     {
-        if(!$role_id){
-            $role = $this->roleModel->where('name','user')->first();
+        if (!$role_id) {
+            $role = $this->roleModel->where('name', 'user')->first();
             $role_id = $role->_id;
         }
         $user = $this->userModel->create([
-            'id'=>$this->generateUuid(),
+            'id' => $this->generateUuid(),
             'email' => $data['email'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'role_id' => $role_id,
-            'role'=>$role->name,
+            'role' => $role->name,
             'password' => bcrypt($data['password']),
-            'profile_picture'=>$profile_picture
+            'profile_picture' => $profile_picture
         ]);
 
-        if(!$user)
+        if (!$user)
             return false;
 
-        $this->sendWelcomeEmail($user,$data['password']);
+        $this->sendWelcomeEmail($user, $data['password']);
         return $user;
-
     }
 
-    public function createHospital($data, $profile_picture, $logo,$role_id=null)
+    public function createHospital($data, $profile_picture, $logo, $role_id = null)
     {
-        if(!$role_id){
+        if (!$role_id) {
             $role = $this->roleModel->where('name', 'hospitaladmin')->first();
             $role_id = $role->_id;
         }
-        $user = User::create([
-            "id"=>$this->generateUuid(),
-            'email' => $data['email'],
+        $user = $this->userModel->create([
+            'id' => $this->generateUuid(),
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
+            'email' => $data['email'],
             'role_id' => $role_id,
-            'role'=>$role->name,
             'password' => bcrypt($data['password']),
-            'profile_picture'=>$profile_picture
+            'role' => $role->name,
+            'profile_picture' => $profile_picture
         ]);
-        dd($user->id);
-        $hospital=$this->hospitalModel->create([
-            'id'=>$this->generateUuid(),
-            'email'=>$data['hospitalemail'],
-            'hospital_name'=>$data['hospitalname'],
-            'address'=>$data['address'],
-            'phone_no'=>$data['phone_no'],
-            'certificate_no'=>$data['certificate_no'],
-            'logo'=>$logo,
-            'user_id'=>$user->id
-        ]);
-        $hospitalstaff=$this->hospitalStaffModel->create([
-            'user_id'=>$user->id,
-            'hospital'=>$hospital->id,
-            'role_id'=>$role_id
-        ]);
+        // dd($user->id);
+        // dd($user);
+        $user_id=$this->userModel->where('email', $user->email)->get();
+        dd($user_id->id);
 
-        if(!$user)
+        return $user;
+        if ($user) {
+            $hospital = $this->hospitalModel->create([
+                'id' => $this->generateUuid(),
+                'email' => $data['hospitalemail'],
+                'hospital_name' => $data['hospitalname'],
+                'address' => $data['address'],
+                'phone_no' => $data['phone_no'],
+                'certificate_no' => $data['certificate_no'],
+                'logo' => $logo,
+                'user_id' => $user->id
+            ]);
+            // dd($user->id);
+            $hospitalstaff = $this->hospitalStaffModel->create([
+                'user_id' => $user->id,
+                'hospital' => $hospital->id,
+                'role_id' => $role_id
+            ]);
+        }
+        if (!$user)
             return false;
 
-        $this->sendWelcomeEmail($user,$data['password']);
-        return array('user'=>$user, 'hospital'=>$hospital);
-
+        $this->sendWelcomeEmail($user, $data['password']);
+        return array('user' => $user, 'hospital' => $hospital);
     }
 
 
 
-    public function updateAccount($data){
-        if(is_array($data))
-            $data = (object)$data;
+    public function updateAccount($data)
+    {
+        if (is_array($data))
+            $data = (object) $data;
 
         $user = auth()->user();
 
-        $user->first_name = $data->first_name?$data->first_name:$user->first_name;
-        $user->last_name = $data->last_name?$data->last_name:$user->last_name;
+        $user->first_name = $data->first_name ? $data->first_name : $user->first_name;
+        $user->last_name = $data->last_name ? $data->last_name : $user->last_name;
 
-        return $user->save()?$user:false;
-
+        return $user->save() ? $user : false;
     }
     // public function register($data){
-        
+
 
     // }
 

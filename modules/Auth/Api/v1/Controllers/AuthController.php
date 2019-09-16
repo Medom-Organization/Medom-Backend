@@ -79,7 +79,7 @@ class AuthController extends BaseController
         $logo = $request->logo->store('logos');
         // $logo = $photo->store('logos');
         // }
-        $user = $this->authRepo->createHospital($request, $profile_picture, $logo);
+        return $this->authRepo->createHospital($request, $profile_picture, $logo);
     }
 
     public function updateProfile(UpdateProfileRequest $request)
