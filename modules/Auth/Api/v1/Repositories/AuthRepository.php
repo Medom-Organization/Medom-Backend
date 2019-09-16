@@ -81,15 +81,9 @@ class AuthRepository extends BaseRepository
             'role' => $role->name,
             'profile_picture' => $profile_picture
         ]);
-        // dd($user->uid);
-        // dd($user);
-        // $user_id = $this->userModel->where('email', $user->email)->select('id')->get();
-        // dd($user_id);
-        // return $user_id;
-
-        // return $user;
+    
         if ($user) {
-            $hospital = $this->hospitalModel->create([
+            $hospital = $this->hospitalModel->updateOrCreate([
                 'id' => $this->generateUuid(),
                 'email' => $data['hospitalemail'],
                 'hospital_name' => $data['hospitalname'],
@@ -99,8 +93,7 @@ class AuthRepository extends BaseRepository
                 'logo' => $logo,
                 'user_id' => $user->uid
             ]);
-            // dd($user->id);
-            $hospitalstaff = $this->hospitalStaffModel->create([
+            $hospitalstaff = $this->hospitalStaffModel->updateOrCreate([
                 'user_id' => $user->id,
                 'hospital' => $hospital->id,
                 'role_id' => $role_id
