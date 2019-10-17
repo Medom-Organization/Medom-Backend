@@ -14,7 +14,7 @@ $api->version('v1', [], function ($api) {
             });
             $api->post('/login', 'AdminController@login');
             $api->get('/users/all', 'AdminController@getUsers');
-            $api->get('/user/roles', 'AdminController@getUsersType')->middleware('auth:api');
+            $api->get('/user/roles', 'AdminController@getUsersType')->middleware('auth:api')->middleware('admin');
             $api->get('/roles', 'AdminController@getRoles')->middleware('auth:api');
             $api->get('/metrics', 'AdminController@metrics')->middleware('auth:api');
             $api->post('/addemployee', 'AdminController@addEmployee')->middleware('auth:api');
