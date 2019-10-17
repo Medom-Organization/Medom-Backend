@@ -24,25 +24,22 @@ class AuthController extends BaseController
     public function login(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
-        // $credentials = request(['email', 'password']);
-
         if (!$token = auth()->attempt($credentials)) {
             return $this->fail("Invalid login credentials");
         }
-
-        $userType=$this->getUserType($request['email']);
-        if($userType){
-        $data = [
-            'token' => $token,
-            'user' => auth()->user(),
-            'hospital'=>$userType
-        ];
-    }else{
-        $data = [
-            'token' => $token,
-            'user' => auth()->user()
-        ];
-    }
+        $userType = $this->getUserType($request['email']);
+        if ($userType) {
+            $data = [
+                'token' => $token,
+                'user' => auth()->user(),
+                'hospital' => $userType
+            ];
+        } else {
+            $data = [
+                'token' => $token,
+                'user' => auth()->user()
+            ];
+        }
 
         return $this->success($data);
     }
@@ -53,15 +50,17 @@ class AuthController extends BaseController
     }
     public function registerUser(RegistrationRequest $request)
     {
-        
+
         $this->validate($request, [
 
             // 'po' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
-            $profile_picture=$request->profile_picture->store('Profiles');
+        // dd($request->logo);
+        $profile_picture = $request->logo->store('Profiles');
         $user = $this->authRepo->createUser($request, $profile_picture);
+        return $user;
     }
     public function registerHospital(HospitalRegistrationRequest $request)
     {
@@ -71,15 +70,15 @@ class AuthController extends BaseController
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000'
 
         ]);
-        // foreach ($request->profile_picture as $photo) {
-        $profile_picture=$request->profile_picture->store('Profiles');
-        // $profile_picture=$photo->store('Profiles');
-        // }
-        // foreach ($request->logo as $photo) {
+        $profile_picture = $request->profile_picture->store('Profiles');
+
         $logo = $request->logo->store('logos');
-        // $logo = $photo->store('logos');
-        // }
-        return $this->authRepo->createHospital($request, $profile_picture, $logo);
+        $check = $this->authRepo->createHospital($request, $profile_picture, $logo);
+        if ($check) {
+            return $check;
+        } else {
+            return $this->fail("registration failed");
+        }
     }
 
     public function updateProfile(UpdateProfileRequest $request)

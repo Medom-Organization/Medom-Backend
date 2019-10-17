@@ -9,8 +9,11 @@ use Medom\Mail\UserWelcomeMail;
 use Medom\Modules\Auth\Models\Role;
 use Medom\Modules\Auth\Models\User;
 use Medom\Modules\Hospitals\Models\Hospitals;
+use Medom\Modules\Hospitals\Models\HospitalAdmin;
 use Medom\Modules\Hospitals\Models\HospitalStaff;
+use Medom\Modules\Hospitals\Models\Settingshospital;
 use Medom\Modules\BaseRepository;
+use Ramsey\Uuid\Uuid;
 
 class AuthRepository extends BaseRepository
 {
@@ -20,6 +23,8 @@ class AuthRepository extends BaseRepository
         $this->userModel = new User;
         $this->hospitalModel = new Hospitals;
         $this->hospitalStaffModel = new HospitalStaff;
+        $this->settingsHospitalModel = new Settingshospital;
+        $this->hospitalAdminModel = new HospitalAdmin;
     }
 
     public function sendWelcomeEmail($user, $password)
@@ -61,49 +66,61 @@ class AuthRepository extends BaseRepository
         if (!$user)
             return false;
 
-        $this->sendWelcomeEmail($user, $data['password']);
+        // $this->sendWelcomeEmail($user, $data['password']);
         return $user;
     }
 
     public function createHospital($data, $profile_picture, $logo, $role_id = null)
     {
-        if (!$role_id) {
-            $role = $this->roleModel->where('name', 'hospitaladmin')->first();
-            $role_id = $role->_id;
-        }
-        $user = $this->userModel->updateOrCreate([
-            'uid' => $this->generateUuid(),
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'role_id' => $role_id,
-            'password' => bcrypt($data['password']),
-            'role' => $role->name,
-            'profile_picture' => $profile_picture
-        ]);
-    
-        if ($user) {
-            $hospital = $this->hospitalModel->updateOrCreate([
-                'hospital_id' => $this->generateUuid(),
-                'email' => $data['hospitalemail'],
-                'hospital_name' => $data['hospitalname'],
-                'address' => $data['address'],
-                'phone_no' => $data['phone_no'],
-                'certificate_no' => $data['certificate_no'],
-                'logo' => $logo,
-                'user_id' => $user->uid
+        $validatehospitalname = Settingshospital::where('hospitalname', $data['hospitalname'])->first();
+        $validatehospitalid = Settingshospital::where('hid', $data['certificate_no'])->first();
+        if (($validatehospitalname->hospitalname && $validatehospitalid->hid) !== null) {
+            if (!$role_id) {
+                $role = $this->roleModel->where('name', 'hospitaladmin')->first();
+                $role_id = $role->_id;
+            }
+            $user = $this->userModel->create([
+                'id' => $this->generateUuid(),
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'role_id' => $role_id,
+                'password' => bcrypt($data['password']),
+                'role' => $role->name,
+                'profile_picture' => $profile_picture
             ]);
-            $hospitalstaff = $this->hospitalStaffModel->create([
-                'user_id' => $user->uid,
-                'hospital_id' => $hospital->hospital_id,
-                'role_id' => $role_id
-            ]);
-        }
-        if (!$user)
-            return false;
 
-        // $this->sendWelcomeEmail($user, $data['password']);
-        return array('user' => $user, 'hospital' => $hospital);
+            if ($user) {
+                $hospital = $this->hospitalModel->create([
+                    'hospital_id' => $this->generateUuid(),
+                    'email' => $data['hospitalemail'],
+                    'hospital_name' => $data['hospitalname'],
+                    'address' => $data['address'],
+                    'phone_no' => $data['phone_no'],
+                    'certificate_no' => $data['certificate_no'],
+                    'logo' => $logo,
+                    'user_id' => $user->id
+                ]);
+
+                $hospitalstaff = $this->hospitalStaffModel->create([
+                    'user_id' => $user->id,
+                    'hospital_id' => $hospital->hospital_id,
+                    'role_id' => $role_id
+                ]);
+                $hospitalAdmin = $this->hospitalAdminModel->create([
+                    'user_id' => $user->id,
+                    'hospital_id' => $hospital->hospital_id,
+                    'role_id' => $role_id
+                ]);
+            }
+            if (!$user)
+                return false;
+
+            // $this->sendWelcomeEmail($user, $data['password']);
+            return array('user' => $user, 'hospital' => $hospital);
+        } else {
+            return false;
+        }
     }
 
 

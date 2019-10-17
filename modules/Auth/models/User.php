@@ -27,7 +27,7 @@ class User extends Model implements
      * @var array
      */
 
-    protected $fillable = ['uid', 'first_name', 'last_name', 'email', 'role_id', 'password', 'role', 'profile_picture'];
+    protected $fillable = ['id', 'first_name', 'last_name', 'email', 'role_id', 'password', 'role', 'profile_picture',];
     protected $hidden = ['password'];
     protected $with = ['role'];
 
@@ -56,7 +56,7 @@ class User extends Model implements
 
     public function role()
     {
-        return $this->hasOne(Role::class, '_id', 'role_id');
+        // return $this->hasOne(Role::class, '_id', 'role_id');
     }
 
     public function fullName()
@@ -69,8 +69,9 @@ class User extends Model implements
             return $query->whereIn('role_id', (array) $roles);
         });
     }
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new Travellab\Notifications\MailResetPasswordNotification($token));
-    }
+    // public function sendPasswordResetNotification($token)
+    // {
+    //     $this->notify(new Travellab\Notifications\MailResetPasswordNotification($token));
+    // }
+    public $incrementing = false;
 }

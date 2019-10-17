@@ -28,7 +28,7 @@ class CreateHospitalsTable extends Migration
         });
         Schema::table('hospitals', function ($table) {
             $table->engine = 'InnoDB';
-            $table->foreign('user_id')->references('uid')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

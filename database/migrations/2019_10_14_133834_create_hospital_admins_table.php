@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHospitalstaffTable extends Migration
+class CreateHospitalAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateHospitalstaffTable extends Migration
      */
     public function up()
     {
-        Schema::create('hospitalstaffs', function (Blueprint $table) {
+        Schema::create('hospital_admins', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('user_id');
@@ -21,7 +21,7 @@ class CreateHospitalstaffTable extends Migration
             $table->string('role_id');
             $table->timestamps();
         });
-        Schema::table('hospitalstaffs', function ($table) {
+        Schema::table('hospital_admins', function ($table) {
             $table->engine = 'InnoDB';
             $table->foreign('role_id')->references('_id')->on('roles')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -36,6 +36,6 @@ class CreateHospitalstaffTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hospitalstaff');
+        Schema::dropIfExists('hospital_admins');
     }
 }

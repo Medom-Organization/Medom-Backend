@@ -25,16 +25,16 @@ class UsersTableSeeder extends Seeder
             ['name' => "hospitaladmin"]
         );
         Role::updateOrCreate(
-            ['_id' => Uuid::uuid4()->toString(), 'name' => 'doctor', 'display_name' => "Doctor"],
-            ['name' => "doctor"]
+            ['_id' => Uuid::uuid4()->toString(), 'name' => 'hospitalprofessional', 'display_name' => "HospitalProfessional"],
+            ['name' => "hospitalprofessional"]
         );
         Role::updateOrCreate(
-            ['_id' => Uuid::uuid4()->toString(), 'name' => 'secetary', 'display_name' => "HospitalSecetary"],
-            ['name' => "secetary"]
+            ['_id' => Uuid::uuid4()->toString(), 'name' => 'hospitalstaff', 'display_name' => "HospitalStaff"],
+            ['name' => "hospitalstaff"]
         );
         Role::updateOrCreate(
-            ['_id' => Uuid::uuid4()->toString(), 'name' => 'employee', 'display_name' => "HospiatalEmployee"],
-            ['name' => "employee"]
+            ['_id' => Uuid::uuid4()->toString(), 'name' => 'unverifiedProfessional', 'display_name' => "unverifiedProfessional"],
+            ['name' => "unverifiedProfessional"]
         );
         Role::updateOrCreate(
             ['_id' => Uuid::uuid4()->toString(), 'name' => 'user', 'display_name' => "Registered User"],
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
         $superadmin = Role::where('name', 'superadmin')->first();
         User::updateOrCreate(
             [
-                'uid' => Uuid::uuid4()->toString(),
+                'id' => Uuid::uuid4()->toString(),
                 'first_name' => 'Daniel',
                 'last_name' => "Mabadeje",
                 'role_id' => $superadmin->_id,
@@ -55,11 +55,11 @@ class UsersTableSeeder extends Seeder
                 'role' => $superadmin->name,
                 'password' => bcrypt('password')
             ],
-            ['email' => "superadmin@travellab.ng"]
+            ['email' => "superadmin@medom.ng"]
         );
         User::updateOrCreate(
             [
-                'uid' => Uuid::uuid4()->toString(),
+                'id' => Uuid::uuid4()->toString(),
                 'first_name' => 'Dynasty',
                 'last_name' => "Emmanuel",
                 'role_id' => $superadmin->_id,

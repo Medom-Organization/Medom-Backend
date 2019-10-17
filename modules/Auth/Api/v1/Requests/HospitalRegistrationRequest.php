@@ -23,16 +23,16 @@ class HospitalRegistrationRequest extends FormRequest
      */
     public function rules()
     {
-        return [            
-            'first_name'=>'required',
-            'last_name'=>'required',
-            'email'=>'required|email',
-            'password'=>'required',
-            'hospitalname'=>'required',
-            'hospitalemail'=>'required|email',
-            'address'=>'required',
-            'phone_no'=>'required',
-            'certificate_no'=>'required',
+        return [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'hospitalname' => 'required',
+            'hospitalemail' => 'required|email',
+            'address' => 'required',
+            'phone_no' => 'required',
+            'certificate_no' => 'required',
         ];
     }
 
