@@ -63,7 +63,8 @@ class AdminController extends BaseController
     public function getUsers(UserTransformer $transformer)
     {
         $users = $this->adminRepo->getUsers();
-        return $this->successWithPages($users, $transformer);
+        return $users;
+        // return $this->successWithPages($users, $transformer);
     }
     public function getUsersType(UserTransformer $transformer, Request $request)
     {
