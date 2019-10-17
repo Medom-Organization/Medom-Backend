@@ -48,8 +48,8 @@ class AuthRepository extends BaseRepository
 
     public function createUser($data, $profile_picture, $role_id = null)
     {
-        // if (!$role_id)
-            $role = Role::all();
+        if (!$role_id)
+            $role = $this->roleModel->where('name', 'user')->first();
             $role_id = $role->id;
             // dd($role);
             // return Role::all();

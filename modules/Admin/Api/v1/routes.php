@@ -13,7 +13,7 @@ $api->version('v1', [], function ($api) {
                 return json_encode(['status' => 'Success', 'message' => 'Admin Api working']);
             });
             $api->post('/login', 'AdminController@login');
-            $api->get('/users/all', 'AdminController@getUsers')->middleware('auth:api');
+            $api->get('/users/all', 'AdminController@getUsers');
             $api->get('/user/roles', 'AdminController@getUsersType')->middleware('auth:api');
             $api->get('/roles', 'AdminController@getRoles')->middleware('auth:api');
             $api->get('/metrics', 'AdminController@metrics')->middleware('auth:api');

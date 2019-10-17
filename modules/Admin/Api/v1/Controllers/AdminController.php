@@ -63,8 +63,8 @@ class AdminController extends BaseController
     public function getUsers(UserTransformer $transformer)
     {
         $users = $this->adminRepo->getUsers();
-        return $users;
-        // return $this->successWithPages($users, $transformer);
+        // return $users;
+        return $this->successWithPages($users, $transformer);
     }
     public function getUsersType(UserTransformer $transformer, Request $request)
     {
@@ -118,8 +118,8 @@ class AdminController extends BaseController
         }
     }
     public function addSuperAdmin(Request $request)
-    {        
-        $this->validate($request,[
+    {
+        $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email',
@@ -128,7 +128,7 @@ class AdminController extends BaseController
 
         $data = $request->all();
         $user = $this->authRepo->createAdmin($data);
-        
+
         if ($user) {
             # code...
         }
@@ -137,7 +137,5 @@ class AdminController extends BaseController
         ];
 
         return $this->success($data);
-
     }
-
 }

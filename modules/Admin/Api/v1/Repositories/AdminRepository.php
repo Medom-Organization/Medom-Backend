@@ -25,8 +25,8 @@ class AdminRepository extends BaseRepository
 
     public function getUsers()
     {
-        // $users = User::paginate(15);
-        $users=User::all();
+        $users = User::paginate(15);
+        // $users = User::all();
         return $users;
     }
     public function getUsersType($roles)
@@ -143,7 +143,7 @@ class AdminRepository extends BaseRepository
         $transactions = array("this_year" => $yearlyincome, "this_month" => $monthlyincome, "today" => $dailyincome);
         $users=array("total_users"=>$allUsers, "customers"=>$customer);
 
-        
+
         foreach ($months as $month) {
             $paymentmetrics[$month] = $this->paymentModel->whereBetween('created_at', [new Carbon('first day of ' . $month), new Carbon('last day of ' . $month)])->sum('amount');
             $bookingmetrics[$month]=$this->orderModel->whereBetween('created_at', [new Carbon('first day of ' . $month), new Carbon('last day of ' . $month)])->count();
@@ -160,10 +160,10 @@ class AdminRepository extends BaseRepository
             'role_id' => $data['role'],
             'password' => bcrypt('password')
         ]);
-        
+
         if(!$user)
             return false;
-        
+
         return $user;
     }
 
