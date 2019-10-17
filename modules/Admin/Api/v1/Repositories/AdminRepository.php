@@ -25,7 +25,8 @@ class AdminRepository extends BaseRepository
 
     public function getUsers()
     {
-        $users = User::paginate(15);
+        // $users = User::paginate(15);
+        $users=User::all();
         return $users;
     }
     public function getUsersType($roles)
