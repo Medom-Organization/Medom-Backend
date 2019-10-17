@@ -20,18 +20,18 @@ $api->version('v1', [], function ($api) {
 
 
 
-    $api->group(['namespace' => 'Medom\Modules\Auth\Api\v1\Controllers'], function () use ($api) {
+    $api->group(['namespace' => 'Medom\Modules\Admin\Api\v1\Controllers'], function () use ($api) {
         // Admin routes
         $api->group(['prefix' => 'admin'], function () use ($api) {
             $api->get('/', function () {
 
                 return json_encode(['status' => 'Success', 'message' => 'Admin Api working']);
             });
-                $api->post('/login', 'AuthController@login');
-                $api->get('/users/all', 'AuthController@getUsers');
-                $api->get('/roles', 'AuthController@getRoles');
-                $api->post('/addemployee', 'AuthController@addSuperAdmin');
-                $api->post('/update/profile', 'AuthController@updateProfile')->middleware('auth:api');
+                $api->post('/login', 'AdminController@login');
+                $api->get('/users/all', 'AdminController@getUsers');
+                $api->get('/roles', 'AdminController@getRoles');
+                $api->post('/addemployee', 'AdminController@addSuperAdmin')->middleware('auth:api');
+                $api->post('/update/profile', 'AdminController@updateProfile')->middleware('auth:api');
         });
     });
 });
