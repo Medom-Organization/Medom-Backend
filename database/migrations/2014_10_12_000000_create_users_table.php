@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
         });
         Schema::table('users', function ($table) {
             $table->engine = 'InnoDB';
-            $table->foreign('role_id')->references('_id')->on('roles')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 

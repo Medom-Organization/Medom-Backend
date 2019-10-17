@@ -23,7 +23,7 @@ class CreateHospitalhandsTable extends Migration
         });
         Schema::table('hospitalhands', function ($table) {
             $table->engine = 'InnoDB';
-            $table->foreign('role_id')->references('_id')->on('roles')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('hospital_id')->references('hospital_id')->on('hospitals')->onDelete('cascade');
         });
