@@ -19,7 +19,7 @@ $api->version('v1', [], function ($api) {
             $api->get('/staffs/all', 'HospitalController@getAllStaffs')->middleware('auth')->middleware('hospitaladmin');
             $api->get('/bookings/all', 'HospitalController@getAllHospitalsBooking')->middleware('auth');
             $api->post('/professional/register', 'HospitalController@registerProfessional')->middleware('auth');
-            $api->get('/hospitals', 'HospitalController@getHospitals');
+            $api->get('/all', 'HospitalController@getHospitals');
         });
     });
 
