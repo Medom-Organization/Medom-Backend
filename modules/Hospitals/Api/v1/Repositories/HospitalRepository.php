@@ -85,4 +85,7 @@ class HospitalRepository extends BaseRepository
     {
         return $this->Professional::all();
     }
+    public function getHospitals(){
+        return $this->hospitalModel::all();
+    }
 }

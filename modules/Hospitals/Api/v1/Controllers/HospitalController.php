@@ -47,4 +47,8 @@ class HospitalController extends BaseController
         $result = $this->hospitalRepo->getAllProfessional();
         return $result;
     }
+    public function getHospitals(){
+        $result=$this->hospitalRepo->getHospitals();
+        return $result;
+    }
 }

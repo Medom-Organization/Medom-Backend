@@ -27,11 +27,11 @@ $api->version('v1', [], function ($api) {
 
                 return json_encode(['status' => 'Success', 'message' => 'Admin Api working']);
             });
-                $api->post('/login', 'AdminController@login');
-                // $api->get('/users/all', 'AdminController@getUsers');
-                $api->get('/roles', 'AdminController@getRoles');
-                $api->post('/addemployee', 'AdminController@addSuperAdmin')->middleware('auth:api');
-                $api->post('/update/profile', 'AdminController@updateProfile')->middleware('auth:api');
+            $api->post('/login', 'AdminController@login');
+            // $api->get('/users/all', 'AdminController@getUsers');
+            $api->get('/roles', 'AdminController@getRoles');
+            $api->post('/addemployee', 'AdminController@addSuperAdmin')->middleware('auth:api');
+            $api->post('/update/profile', 'AdminController@updateProfile')->middleware('auth:api');
         });
     });
 });
