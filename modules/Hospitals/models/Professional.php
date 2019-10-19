@@ -14,4 +14,5 @@ class Professional extends Model
      * @var array
      */
     protected $fillable = ['user_id', 'role_id', 'status'];
+    // public $incrementing = false;
 }

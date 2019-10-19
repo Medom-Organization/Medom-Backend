@@ -34,10 +34,11 @@ class AuthRepository extends BaseRepository
     }
     public function getUserType($email)
     {
-        $user = $this->userModel->where('email', $email);
-        $roleid = $user->roleid;
+        $user = $this->userModel->where('email', $email)->first();
+        // $roleid = $user->role;
+        // dd($user->id);
         $userid = $user->id;
-        $usertype = $this->hospitalStaffModel->where('user_id', $userid);
+        $usertype = $this->hospitalStaffModel->where('user_id', $userid)->first();
         if ($usertype) {
             $hospital[] = $this->hospitalModel->where('id', $usertype->id);
             return $hospital;
@@ -51,7 +52,7 @@ class AuthRepository extends BaseRepository
         if (!$role_id)
             $role = $this->roleModel->where('name', 'user')->first();
             $role_id = $role->id;
-            // dd($role);
+            // dd($role->id);
             // return Role::all();
         $user = $this->userModel->create([
             'id' => $this->generateUuid(),
@@ -78,7 +79,7 @@ class AuthRepository extends BaseRepository
         if (($validatehospitalname->hospitalname && $validatehospitalid->hid) !== null) {
             if (!$role_id) {
                 $role = $this->roleModel->where('name', 'hospitaladmin')->first();
-                $role_id = $role->_id;
+                $role_id = $role->id;
             }
             $user = $this->userModel->create([
                 'id' => $this->generateUuid(),

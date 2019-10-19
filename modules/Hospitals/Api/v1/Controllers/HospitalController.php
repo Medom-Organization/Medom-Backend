@@ -40,11 +40,13 @@ class HospitalController extends BaseController
     public function registerProfessional()
     {
         $result = $this->hospitalRepo->registerProfessional();
-        return $result;
+        if($result){
+        return $this->success("Your Profile was updated to UnverifiedProfessional");
+        }
     }
     public function getAllProfessionals()
     {
-        $result = $this->hospitalRepo->getAllProfessional();
+        $result = $this->hospitalRepo->getAllProfessionals();
         return $result;
     }
     public function getHospitals(){

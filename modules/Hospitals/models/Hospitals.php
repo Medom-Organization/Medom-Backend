@@ -14,4 +14,6 @@ class Hospitals extends Model
      * @var array
      */
     protected $fillable = ['hospital_id', 'hospital_name', 'email', "address", 'phone_no', 'certificate_no', 'logo', 'user_id'];
+
+    public $incrementing = false;
 }

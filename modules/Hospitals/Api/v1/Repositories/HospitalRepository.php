@@ -70,8 +70,9 @@ class HospitalRepository extends BaseRepository
     public function registerProfessional()
     {
         $user = auth()->user();
-        $role = $this->roleModel->where('name', 'unverifiedprofessional')->get();
-        $this->userModel->where('id', $user->id)->update([
+        $role = $this->roleModel->where('name', 'unverifiedProfessional')->first();
+        // dd($role);
+        $updateuser=$this->userModel->where('id', $user->id)->update([
             'role_id' => $role->id,
             'role' => $role->name
         ]);
@@ -80,10 +81,20 @@ class HospitalRepository extends BaseRepository
             'role_id' => $role->id,
             'status' => 'unverified'
         ]);
+        if($updateuser && $professional){
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     public function getAllProfessionals()
     {
-        return $this->Professional::all();
+        $result= $this->Professional::all();
+        foreach($result as $result){
+            $data[]=$this->userModel->where('id', $result->user_id)->get();
+        }
+return $data;
     }
     public function getHospitals(){
         return $this->hospitalModel::all();
