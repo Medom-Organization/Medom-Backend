@@ -4,7 +4,7 @@ namespace Medom\Http\Middleware;
 
 use Closure;
 
-class admin
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class admin
     public function handle($request, Closure $next)
     {
         $user = auth()->user();
-        if ($user->role->name == 'superadmin') {
+        if ($user->role == 'superadmin') {
             return $next($request);
         }else{
         return response()->json(['success' => false, 'error' =>'Access Denied'], 401);

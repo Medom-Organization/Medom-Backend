@@ -16,7 +16,7 @@ class hospitaladmin
     public function handle($request, Closure $next)
     {
         $user = auth()->user();
-        if ($user->role->name == 'hospitaladmin') {
+        if ($user->role == 'hospitaladmin') {
             return $next($request);
         }else{
         return response()->json(['success' => false, 'error' =>'Access Denied'], 401);

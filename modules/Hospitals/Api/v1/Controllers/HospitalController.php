@@ -24,14 +24,24 @@ class HospitalController extends BaseController
     {
         $result = $this->hospitalRepo->addHospitalAdmin();
     }
-    public function addHospitalProfessional(Type $request, $id)
+    public function addHospitalProfessional(AddHospitalProfessionalRequest $request, $id)
     {
-        $result = $this->hospital->addHospitalProfessional($request->all(), $id);
+        $result = $this->hospitalRepo->addHospitalProfessional($request->all(), $id);
         // retur
+        if($result){
+            return $this->success("Professional added successfully");
+        }else{
+            return $this->fail("unale to add professional");
+        }
     }
-    public function addHospitalstaff(Type $var = null)
+    public function addHospitalstaff(AddHospitalStaffRequest $request, $id)
     {
-        # code...
+        $result=$this->hospitalRepo->addHospitalstaff($request->all(), $id);
+        if($result){
+            return $this->success("Hospital Staff added successfully");
+        }else{
+            return $this->fail("unale to add hospital staff");
+        }
     }
     public function getHospitalProfessional(Type $var = null)
     {
