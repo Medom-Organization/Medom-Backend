@@ -16,23 +16,11 @@ class Order extends Model
         'amount',
         'currency',
         'price_info',
-        'free_baggages',
-        'departure_leg',
-        'return_leg',
-        'booking_reference',
-        'pnr',
-        'ticket_time_limit',
-        'total_travellers',
-        'traveller_stats',
-        'travellers',
-        'from',
-        'to',
-        'departure_city',
-        'destination_city',
-        'departure_date',
-        'return_date',
         'status',
-        'user_id'
+        'user_id',
+        'hospital_id',
+        'date',
+        'time'
     ];
 
     // public function flight()

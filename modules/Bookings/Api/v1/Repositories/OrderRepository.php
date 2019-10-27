@@ -48,21 +48,6 @@ class OrderRepository extends BaseRepository
             $order = Order::create([
                 'booking_id' => $this->generateBookingId(),
                 'price_info' => $data->price_info,
-                'free_baggages' => $data->free_baggages,
-                'departure_leg' => $data->departure_leg,
-                'return_leg' => $data->return_leg,
-                'booking_reference' => $data->booking_reference,
-                'pnr' => $data->booking_reference['id'],
-                'ticket_time_limit' => $data->ticket_time_limit,
-                'total_travellers' => $data->total_travellers,
-                'traveller_stats' => $data->traveller_stats,
-                'travellers' => $data->travellers,
-                'from' => $data->from,
-                'to' => $data->to,
-                'departure_city' => $data->departure_city,
-                'destination_city' => $data->destination_city,
-                'departure_date' => $data->departure_date,
-                'return_date' => $data->return_date,
                 'surname' => $data->travellers[0]['surname'],
                 'first_name' => $data->travellers[0]['first_name'],
                 'email' => $data->travellers[0]['email'],
@@ -71,6 +56,9 @@ class OrderRepository extends BaseRepository
                 'currency' => $data->price_info['ItinTotalFare']['TotalFare']['_attributes']['Currency'],
                 'status' => 'pending payment',
                 'user_id' => $user->_id,
+                'hospital_id'=>$data->hospital_id,
+                'date'=>$data->date,
+                'time'=>$data->time,
             ]);
         }
 
@@ -262,90 +250,90 @@ class OrderRepository extends BaseRepository
     //     }
     // }
 
-    public function createTicket($data)
-    {
-        // return $data;
-        $xmlParams = $this->ticketRequestTemplate($data);
-        $this->formatXml($xmlParams);
-        return $this->handleAmadeusSoapRequest($this->formatXml($xmlParams));
-    }
-    public function ticketRequestTemplate($data)
-    {
+    // public function createTicket($data)
+    // {
+    //     // return $data;
+    //     $xmlParams = $this->ticketRequestTemplate($data);
+    //     $this->formatXml($xmlParams);
+    //     return $this->handleAmadeusSoapRequest($this->formatXml($xmlParams));
+    // }
+    // public function ticketRequestTemplate($data)
+    // {
 
-        $nameTrimmer = new NameTrimmer($data->travellers);
+    //     $nameTrimmer = new NameTrimmer($data->travellers);
 
-        $travellers = $nameTrimmer->getTravellersWithTrimNames();
-        $airTravellers = "";
-        for ($i = 0; $i < count($travellers); $i++) {
-
-
-            //            $nameLength = strlen( $travellers[$i]['title'].$travellers[$i]['first_name'].$travellers[$i]['surname']);
-            //            $adultNameLenght = 57;
-            //            $childNamelenght = 41;
-            //            $firstNameLength = strlen($travellers[$i]['first_name']);
-            //
-            //            if(strtolower($travellers[$i]['type'])=='adt'){
-            //                if($nameLength>$adultNameLenght){
-            //
-            //                   $extraChars = $nameLength - $adultNameLenght;
-            //                   $travellers[$i]['first_name'] = substr( $travellers[$i]['first_name'],0,$firstNameLength-$extraChars);
-            //
-            //
-            //                }
-            //            }elseif(strtolower($travellers[$i]['type'])=='chd' || strtolower($travellers[$i]['type'])=='inf'){
-            //
-            //                if($nameLength>$childNamelenght){
-            //                    $extraChars = $nameLength - $childNamelenght;
-            //                    $travellers[$i]['first_name'] = substr( $travellers[$i]['first_name'],0,$firstNameLength-$extraChars);
-            //                }
-            //
-            //              }
+    //     $travellers = $nameTrimmer->getTravellersWithTrimNames();
+    //     $airTravellers = "";
+    //     for ($i = 0; $i < count($travellers); $i++) {
 
 
-
-            $airTravellers .=
-                '<AirTraveler PassengerTypeCode="' . strtoupper($travellers[$i]['type']) . '">
-                      <PersonName>
-                        <GivenName>' . $travellers[$i]['first_name'] . '</GivenName>
-                        <Surname>' . $travellers[$i]['surname'] . '</Surname>
-                        <NamePrefix>' . $travellers[$i]['title'] . '</NamePrefix>
-                      </PersonName>';
-
-            if ($i == 0) {
-                $airTravellers .= '
-                        <Email EmailType="1">' . $travellers[0]['email'] . '</Email>';
-            }
-
-            $airTravellers .= '
-                    <BirthDate>' . $travellers[$i]['dob'] . '</BirthDate>
-              </AirTraveler>
-              ';
-        }
-
-
-        if ($data['reference_number']) {
-            $securityNumber = "780059351";
-            $reference = $data['reference_number'];
-            $controlNumber = sha1($reference . $securityNumber);
-            $OTARequest = '<OTA_AirBookRQ  ReferenceNumber="' . $data['reference_number'] . '" ControlNumber="' . $controlNumber . '">';
-        } else {
-            $OTARequest = '<OTA_AirBookRQ>';
-        }
+    //         //            $nameLength = strlen( $travellers[$i]['title'].$travellers[$i]['first_name'].$travellers[$i]['surname']);
+    //         //            $adultNameLenght = 57;
+    //         //            $childNamelenght = 41;
+    //         //            $firstNameLength = strlen($travellers[$i]['first_name']);
+    //         //
+    //         //            if(strtolower($travellers[$i]['type'])=='adt'){
+    //         //                if($nameLength>$adultNameLenght){
+    //         //
+    //         //                   $extraChars = $nameLength - $adultNameLenght;
+    //         //                   $travellers[$i]['first_name'] = substr( $travellers[$i]['first_name'],0,$firstNameLength-$extraChars);
+    //         //
+    //         //
+    //         //                }
+    //         //            }elseif(strtolower($travellers[$i]['type'])=='chd' || strtolower($travellers[$i]['type'])=='inf'){
+    //         //
+    //         //                if($nameLength>$childNamelenght){
+    //         //                    $extraChars = $nameLength - $childNamelenght;
+    //         //                    $travellers[$i]['first_name'] = substr( $travellers[$i]['first_name'],0,$firstNameLength-$extraChars);
+    //         //                }
+    //         //
+    //         //              }
 
 
-        $xmlParams = '
-            <CreateTicket xmlns="http://epowerv5.amadeus.com.tr/WS">
-             ' . $OTARequest . '
-                <BookingReferenceID ID_Context="' . $data->pnr . '"/>
-                <TravelerInfo>
-                   ' . $airTravellers . '
-                </TravelerInfo>
-              </OTA_AirBookRQ>
-            </CreateTicket>
-        ';
 
-        return $xmlParams;
-    }
+    //         $airTravellers .=
+    //             '<AirTraveler PassengerTypeCode="' . strtoupper($travellers[$i]['type']) . '">
+    //                   <PersonName>
+    //                     <GivenName>' . $travellers[$i]['first_name'] . '</GivenName>
+    //                     <Surname>' . $travellers[$i]['surname'] . '</Surname>
+    //                     <NamePrefix>' . $travellers[$i]['title'] . '</NamePrefix>
+    //                   </PersonName>';
+
+    //         if ($i == 0) {
+    //             $airTravellers .= '
+    //                     <Email EmailType="1">' . $travellers[0]['email'] . '</Email>';
+    //         }
+
+    //         $airTravellers .= '
+    //                 <BirthDate>' . $travellers[$i]['dob'] . '</BirthDate>
+    //           </AirTraveler>
+    //           ';
+    //     }
+
+
+    //     if ($data['reference_number']) {
+    //         $securityNumber = "780059351";
+    //         $reference = $data['reference_number'];
+    //         $controlNumber = sha1($reference . $securityNumber);
+    //         $OTARequest = '<OTA_AirBookRQ  ReferenceNumber="' . $data['reference_number'] . '" ControlNumber="' . $controlNumber . '">';
+    //     } else {
+    //         $OTARequest = '<OTA_AirBookRQ>';
+    //     }
+
+
+    //     $xmlParams = '
+    //         <CreateTicket xmlns="http://epowerv5.amadeus.com.tr/WS">
+    //          ' . $OTARequest . '
+    //             <BookingReferenceID ID_Context="' . $data->pnr . '"/>
+    //             <TravelerInfo>
+    //                ' . $airTravellers . '
+    //             </TravelerInfo>
+    //           </OTA_AirBookRQ>
+    //         </CreateTicket>
+    //     ';
+
+    //     return $xmlParams;
+    // }
 
     public function listOrdersbyUser()
     {
