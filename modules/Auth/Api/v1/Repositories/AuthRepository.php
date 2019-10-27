@@ -137,9 +137,10 @@ class AuthRepository extends BaseRepository
 
         return $user->save() ? $user : false;
     }
-    // public function register($data){
-
-
-    // }
+    public function getUserByEmail($email)
+    {
+        $user = $this->userModel->where('email', $email)->first();
+        return $user;
+    }
 
 }

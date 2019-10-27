@@ -6,13 +6,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-// use Medom\Mail\FlightTicketMailable;
 use Medom\Mail\OrderCreationMailable;
 use Medom\Modules\Auth\Api\v1\Repositories\AuthRepository;
 use Medom\Modules\BaseRepository;
 use Medom\Modules\Booking\Models\Order;
 use Medom\Modules\Booking\Models\Payment;
-use Medom\Modules\NameTrimmer;
 
 class OrderRepository extends BaseRepository
 {
@@ -31,19 +29,6 @@ class OrderRepository extends BaseRepository
         $email = $data->travellers[0]['email'];
         $user = $this->authRepo->getUserByEmail($email);
 
-        if (!$user) {
-            $newPassword = str_random(8);
-
-            $userData = [
-                'last_name' => $data->travellers[0]['surname'],
-                'first_name' => $data->travellers[0]['first_name'],
-                'email' => $data->travellers[0]['email'],
-                'password' => $newPassword,
-            ];
-
-            $user = $this->authRepo->createUser($userData);
-        }
-
         if (!$order) {
             $order = Order::create([
                 'booking_id' => $this->generateBookingId(),
@@ -55,7 +40,7 @@ class OrderRepository extends BaseRepository
                 'amount' => $data->price_info['ItinTotalFare']['TotalFare']['_attributes']['Amount'],
                 'currency' => $data->price_info['ItinTotalFare']['TotalFare']['_attributes']['Currency'],
                 'status' => 'pending payment',
-                'user_id' => $user->_id,
+                'user_id' => $user->id,
                 'hospital_id'=>$data->hospital_id,
                 'date'=>$data->date,
                 'time'=>$data->time,
@@ -228,112 +213,6 @@ class OrderRepository extends BaseRepository
             return false;
         }
     }
-
-    // public function sendTicketEmail(Order $order)
-    // {
-
-
-    //     try {
-
-    //         Mail::to($order->email)->later(now()->addSecond(5), new FlightTicketMailable($order));
-
-    //         if (count(Mail::failures()) < 1) {
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     } catch (\Exception $e) {
-
-    //         print $e->getMessage();
-
-    //         return false;
-    //     }
-    // }
-
-    // public function createTicket($data)
-    // {
-    //     // return $data;
-    //     $xmlParams = $this->ticketRequestTemplate($data);
-    //     $this->formatXml($xmlParams);
-    //     return $this->handleAmadeusSoapRequest($this->formatXml($xmlParams));
-    // }
-    // public function ticketRequestTemplate($data)
-    // {
-
-    //     $nameTrimmer = new NameTrimmer($data->travellers);
-
-    //     $travellers = $nameTrimmer->getTravellersWithTrimNames();
-    //     $airTravellers = "";
-    //     for ($i = 0; $i < count($travellers); $i++) {
-
-
-    //         //            $nameLength = strlen( $travellers[$i]['title'].$travellers[$i]['first_name'].$travellers[$i]['surname']);
-    //         //            $adultNameLenght = 57;
-    //         //            $childNamelenght = 41;
-    //         //            $firstNameLength = strlen($travellers[$i]['first_name']);
-    //         //
-    //         //            if(strtolower($travellers[$i]['type'])=='adt'){
-    //         //                if($nameLength>$adultNameLenght){
-    //         //
-    //         //                   $extraChars = $nameLength - $adultNameLenght;
-    //         //                   $travellers[$i]['first_name'] = substr( $travellers[$i]['first_name'],0,$firstNameLength-$extraChars);
-    //         //
-    //         //
-    //         //                }
-    //         //            }elseif(strtolower($travellers[$i]['type'])=='chd' || strtolower($travellers[$i]['type'])=='inf'){
-    //         //
-    //         //                if($nameLength>$childNamelenght){
-    //         //                    $extraChars = $nameLength - $childNamelenght;
-    //         //                    $travellers[$i]['first_name'] = substr( $travellers[$i]['first_name'],0,$firstNameLength-$extraChars);
-    //         //                }
-    //         //
-    //         //              }
-
-
-
-    //         $airTravellers .=
-    //             '<AirTraveler PassengerTypeCode="' . strtoupper($travellers[$i]['type']) . '">
-    //                   <PersonName>
-    //                     <GivenName>' . $travellers[$i]['first_name'] . '</GivenName>
-    //                     <Surname>' . $travellers[$i]['surname'] . '</Surname>
-    //                     <NamePrefix>' . $travellers[$i]['title'] . '</NamePrefix>
-    //                   </PersonName>';
-
-    //         if ($i == 0) {
-    //             $airTravellers .= '
-    //                     <Email EmailType="1">' . $travellers[0]['email'] . '</Email>';
-    //         }
-
-    //         $airTravellers .= '
-    //                 <BirthDate>' . $travellers[$i]['dob'] . '</BirthDate>
-    //           </AirTraveler>
-    //           ';
-    //     }
-
-
-    //     if ($data['reference_number']) {
-    //         $securityNumber = "780059351";
-    //         $reference = $data['reference_number'];
-    //         $controlNumber = sha1($reference . $securityNumber);
-    //         $OTARequest = '<OTA_AirBookRQ  ReferenceNumber="' . $data['reference_number'] . '" ControlNumber="' . $controlNumber . '">';
-    //     } else {
-    //         $OTARequest = '<OTA_AirBookRQ>';
-    //     }
-
-
-    //     $xmlParams = '
-    //         <CreateTicket xmlns="http://epowerv5.amadeus.com.tr/WS">
-    //          ' . $OTARequest . '
-    //             <BookingReferenceID ID_Context="' . $data->pnr . '"/>
-    //             <TravelerInfo>
-    //                ' . $airTravellers . '
-    //             </TravelerInfo>
-    //           </OTA_AirBookRQ>
-    //         </CreateTicket>
-    //     ';
-
-    //     return $xmlParams;
-    // }
 
     public function listOrdersbyUser()
     {
