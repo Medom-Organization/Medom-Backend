@@ -15,7 +15,7 @@ $api->version('v1', [], function ($api) {
             // $api
             // Order routes
             $api->group(['prefix' => 'order'], function () use ($api) {
-                $api->post('/new', 'OrderController@newOrder');
+                $api->post('/new', 'OrderController@newOrder')->middleware('auth:api');
                 $api->get('/list', 'OrderController@listOrders');
                 $api->get('{id}/all', 'OrderController@listOrdersbyUserId')->middleware('auth')->middleware('admin');
                 $api->get('user/{id}/all', 'OrderController@listOrdersbyId');

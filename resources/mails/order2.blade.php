@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Travellab Order Confirmation</title>
+    <title>Medom Order Confirmation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
@@ -16,7 +16,7 @@
       >
     <tr>
         <td style="text-align: center; padding: 30px">
-            <img src="{{ asset('/images/logo.png') }}" alt="Travellab Logo"
+            <img src="{{ asset('/images/logo.png') }}" alt="Medom Logo"
                  style="border:none; display:inline-block;" height="60">
         </td>
     </tr>
@@ -47,10 +47,7 @@
                     <th>Booking ID</th>
                     <td>{{$order->booking_id}}</td>
                 </tr>
-                <tr>
-                    <th>Booking Reference</th>
-                    <td>{{$order->booking_ref }}</td>
-                </tr>
+               
                 <tr>
                     <th>Status</th>
                     <td>{{$order->status}}</td>
@@ -62,74 +59,15 @@
             </table>
         </td>
     </tr>
-    <tr>
-        <td  style="padding: 20px 30px ">
-           <table style="width: 100%; border-collapse: collapse;border: 0.5px solid #F48884; ">
-               <tr style="background: #AD3335;  color: #fff;">
-                   <td style="padding: 10px">
-                       <div style="font-weight: bold"> {{$order->outbound_flight_no}}</div>
-                        <div >{{$order->outbound_airline}}</div>
-                   </td>
-                   <td style="font-weight: bold; text-align: right; padding: 10px">
-                       Outbound
-                   </td>
-               </tr>
-
-               <tr>
-                   <td style=" font-size: 11px; padding:20px 10px;border-bottom: 3px solid #F48884; ">
-                       <div style=" line-height: 12px;">{{$order->out_depart_date}}</div>
-                       <div style=" font-size: 1.5em;font-weight: bold; color: #EF493A;">{{$order->out_depart_time}}</div>
-                       <div style="line-height: 14px;color:#999; font-weight: bold">{{$order->out_depart_airport}}</div>
-                   </td>
-
-                   <td style=" font-size: 11px; padding:20px 10px; border-bottom: 3px solid #F48884; ">
-                       <div style=" line-height: 12px;">{{$order->out_arrival_date}}</div>
-                       <div style=" font-size: 1.5em;font-weight: bold; color: #EF493A;">{{$order->out_arrival_time}}</div>
-                       <div style="line-height: 14px;color:#999; font-weight: bold">{{$order->out_arrival_airport}}</div>
-                   </td>
-               </tr>
-           </table>
-
-            <table style="width: 100%; border-collapse: collapse;border: 0.5px solid #F48884; margin-top: 20px; ">
-                <tr style="background: #AD3335;  color: #fff;">
-                    <td style="padding: 10px">
-                        <div style="font-weight: bold"> {{$order->inbound_flight_no}}</div>
-                        <div > {{$order->inbound_airline}}</div>
-                    </td>
-                    <td style="font-weight: bold; text-align: right; padding: 10px">
-                        Inbound
-                    </td>
-                </tr>
-                <tr>
-                    <td style=" font-size: 11px; padding:20px 10px;border-bottom: 3px solid #F48884; ">
-                        <div style=" line-height: 12px;">{{$order->in_depart_date}}</div>
-                        <div style=" font-size: 1.5em;font-weight: bold; color: #EF493A;">{{$order->in_depart_time}}</div>
-                        <div style="line-height: 14px;color:#999; font-weight: bold"><b>{{$order->in_depart_airport}}</b></div>
-                    </td>
-
-                    <td style=" font-size: 11px; padding:20px 10px; border-bottom: 3px solid #F48884; ">
-                        <div style=" line-height: 12px;">{{$order->in_arrival_date}}</div>
-                        <div style=" font-size: 1.5em;font-weight: bold; color: #EF493A;">{{$order->in_arrival_time}}</div>
-                        <div style="line-height: 14px;color:#999; font-weight: bold"><b>{{$order->in_arrival_airport}}</b></div>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding:20px 30px;">
-            <p>Thank you for patronizing us</p>
-            <br>
-            <p><b>Travellab Support Team</b></p>
-        </td>
-    </tr>
+ 
+    
     <tr>
         <td>
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="600"
                    style="border:none; width:600px; margin-top: 20px; margin-bottom: 40px; text-align: center; color: #85868a;">
                 <tr>
                     <td style="padding-top: 20px;">
-                        Copyright &copy; {{date('Y')}} TravelLab Limited. All Rights Reserved.
+                        Copyright &copy; {{date('Y')}} Medom Limited. All Rights Reserved.
                     </td>
                 </tr>
 
