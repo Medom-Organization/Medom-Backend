@@ -13,6 +13,22 @@ $api->version('v1', [], function ($api) {
                 return json_encode(['status' => 'Success', 'message' => 'Booking Api working']);
             });
             // $api
+            // Order routes
+            $api->group(['prefix' => 'order'], function () use ($api) {
+                $api->post('/new', 'OrderController@newOrder');
+                $api->get('/list', 'OrderController@listOrders');
+                $api->get('{id}/all', 'OrderController@listOrdersbyUserId')->middleware('auth')->middleware('admin');
+                $api->get('user/{id}/all', 'OrderController@listOrdersbyId');
+                $api->get('/user', 'OrderController@listOrdersbyUser')->middleware('auth:api');
+                $api->post('/filter', 'OrderController@filterorderbyUser')->middleware('auth:api');
+
+                $api->post('/payment/new', 'OrderController@newPayment');
+                $api->get("/payment/verify/{ref}", 'OrderController@verifyPayment');
+                $api->get("/payment/all", 'OrderController@allPayment');
+
+                $api->post('/create-ticket', 'OrderController@createTicket');
+                $api->post('/confirm-booking/{orderId}', 'OrderController@confirmBooking');
+            });
         });
     });
 });
