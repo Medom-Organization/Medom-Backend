@@ -1,13 +1,13 @@
 <?php
 
-namespace Medom\Modules\Booking\Api\v1\Controllers;
+namespace Medom\Modules\Bookings\Api\v1\Controllers;
 
 use Illuminate\Http\Request;
 use Medom\Modules\Auth\Api\v1\Transformers\UserTransformer;
 use Medom\Modules\BaseController;
-use Medom\Modules\Booking\Api\v1\Repositories\OrderRepository;
-use Medom\Modules\Booking\Api\v1\Transformers\OrderTransformer;
-use Medom\Modules\Booking\Api\v1\Requests\FilterOrderRequest;
+use Medom\Modules\Bookings\Api\v1\Repositories\OrderRepository;
+use Medom\Modules\Bookings\Api\v1\Transformers\OrderTransformer;
+use Medom\Modules\Bookings\Api\v1\Requests\FilterOrderRequest;
 
 class OrderController extends BaseController
 {

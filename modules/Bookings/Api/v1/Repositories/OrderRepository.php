@@ -1,6 +1,6 @@
 <?php
 
-namespace Medom\Modules\Booking\Api\v1\Repositories;
+namespace Medom\Modules\Bookings\Api\v1\Repositories;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

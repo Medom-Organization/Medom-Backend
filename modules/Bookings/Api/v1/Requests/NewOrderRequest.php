@@ -1,6 +1,6 @@
 <?php
 
-namespace Medom\Modules\Booking\Api\v1\Requests;
+namespace Medom\Modules\Bookings\Api\v1\Requests;
 
 use Dingo\Api\Http\FormRequest;
 
