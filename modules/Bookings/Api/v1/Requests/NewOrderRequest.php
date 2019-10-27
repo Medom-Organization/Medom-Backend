@@ -16,9 +16,9 @@ class NewOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            ''
-            'symptoms'=>'required',
-            'booking_type'=>'required',
+            // ''
+            'symptoms' => 'required',
+            'booking_type' => 'required',
             'hospital_id' => 'required',
             'time' => 'required',
             'date' => 'required',

@@ -25,25 +25,25 @@ class OrderRepository extends BaseRepository
 
     public function create($data)
     {
-        $email = $data->travellers[0]['email'];
+        // $email = $data->travellers[0]['email'];
         $user = auth()->user();
 
 
-            $order = Order::create([
-                'booking_id' => $this->generateBookingId(),
-                'price_info' => $data->price_info,
-                'surname' => $user->surname,
-                'first_name' => $data->first_name,
-                'email' => $user->email,
-                'phone' => $user->phone,
-                'amount' => $data->amount,
-                'currency' => $data->currency,
-                'status' => 'pending payment',
-                'user_id' => $user->id,
-                'hospital_id'=>$data->hospital_id,
-                'date'=>$data->date,
-                'time'=>$data->time,
-            ]);
+        $order = Order::create([
+            'booking_id' => $this->generateBookingId(),
+            'price_info' => $data->price_info,
+            'surname' => $user->surname,
+            'first_name' => $data->first_name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'amount' => $data->amount,
+            'currency' => $data->currency,
+            'status' => 'pending payment',
+            'user_id' => $user->id,
+            'hospital_id' => $data->hospital_id,
+            'date' => $data->date,
+            'time' => $data->time,
+        ]);
 
         $this->sendOrderCreationEmail($order);
 

@@ -70,22 +70,6 @@ class OrderController extends BaseController
         return $this->orderRepo->verifyPayment($reference);
     }
 
-    public function createTicket(Request $request)
-    {
-        $this->validate($request, [
-            'travellers' => 'required',
-            'pnr' => 'required',
-        ]);
-
-        $ticket = $this->orderRepo->createTicket($request);
-
-        return $ticket;
-    }
-
-    public function sendTicket(Request $request, $ref)
-    {
-        return $this->success($this->orderRepo->sendTicketEmail($ref));
-    }
 
     public function confirmBooking(Request $request, $orderId)
     {
