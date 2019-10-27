@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>TravelLab - New Booking</title>
+    <title>Medom - New Booking</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
     <style>
         .default-color {
@@ -31,7 +31,7 @@
                    bgcolor="#ffffff">
                 <tr>
                     <td style="text-align: center; vertical-align: top;">
-                        <img src="{{ asset('/images/logo.png') }}" alt="Travellab Logo"
+                        <img src="{{ asset('/images/logo.png') }}" alt="Medom Logo"
                              style="border:none; display:inline-block;" height="60">
                     </td>
                 </tr>
@@ -43,7 +43,7 @@
                 <tr>
                     <td style="padding-top: 10px; font-weight: 300; line-height: 36px; font-size: 18px; font-family: 'Open Sans',Helvetica,Arial,sans-serif; color: #666; letter-spacing: -1px;">
                         <p class="default-color"><b>Dear {{$user->first_name}},</b></p>
-                        <p>Thank you for signing up. Your account was created successfully , your default password is  <b>{{$password}}</b> please ensure you change it on first login
+                        <p>Thank you for signing up. Your account was created successfully , your default password is  <b>{{$password}}</b> 
                         </p>
                     </td>
                 </tr>
@@ -120,7 +120,7 @@
                         <p>Thank you for patronizing us</p>
                         <br>
 
-                        <p><b>Travellab Support Team</b></p>
+                        <p><b>Medom Support Team</b></p>
                     </td>
                 </tr>
 
@@ -135,7 +135,7 @@
                    style="border:none; width:600; margin-top: 20px; margin-bottom: 40px; text-align: center; color: #85868a;">
                 <tr>
                     <td style="padding-top: 20px;">
-                        Copyright &copy; {{date('Y')}} TravelLab Limited. All Rights Reserved.
+                        Copyright &copy; {{date('Y')}} Medom Limited. All Rights Reserved.
                     </td>
                 </tr>
 

@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>TravelLab - Password - Reset</title>
+    <title>Medom - Password - Reset</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
     <style>
         .default-color {
@@ -31,7 +31,7 @@
                    bgcolor="#ffffff">
                 <tr>
                     <td style="text-align: center; vertical-align: top;">
-                        <img src="{{ asset('/images/logo.png') }}" alt="Travellab Logo"
+                        <img src="{{ asset('/images/logo.png') }}" alt="Medom Logo"
                              style="border:none; display:inline-block;" height="60">
                     </td>
                 </tr>
@@ -45,7 +45,7 @@
                         <p class="default-color"><b>Dear {{$user->fullname()}},</b></p>
                             <p>A Request to Reset Paasword Was Sent to us</p>
                             <p>Please click on the link below..</p>
-                            <a href="https://www.travellab.ng/reset-password/{{$token}}" id="reset-btn">Reset Password</a>
+                            <a href="https://www.medom.com/reset-password/{{$token}}" id="reset-btn">Reset Password</a>
 
                         {{--  </p>  --}}
                     </td>
@@ -137,7 +137,7 @@
                         <p>If You did not request this, no further action is required</p>
                         <br>
 
-                        <p><b>Travellab Support Team</b></p>
+                        <p><b>Medom Support Team</b></p>
                     </td>
                 </tr>
 
@@ -152,7 +152,7 @@
                    style="border:none; width:600; margin-top: 20px; margin-bottom: 40px; text-align: center; color: #85868a;">
                 <tr>
                     <td style="padding-top: 20px;">
-                        Copyright &copy; {{date('Y')}} TravelLab Limited. All Rights Reserved.
+                        Copyright &copy; {{date('Y')}} Medom Limited. All Rights Reserved.
                     </td>
                 </tr>
 

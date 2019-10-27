@@ -1,12 +1,12 @@
 <?php
 
-namespace Travellab\Mail;
+namespace Medom\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Travellab\Modules\Auth\Models\User;
+use Medom\Modules\Auth\Models\User;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class MailResetPasswordNotification extends Mailable
@@ -45,7 +45,7 @@ class MailResetPasswordNotification extends Mailable
     public function build()
     {
 
-        return $this->subject("Your Travellab Account")
+        return $this->subject("Your Medom Account")
             ->view('mails.password-reset', ["user" => $this->user, "token" => $this->token]);
     }
 

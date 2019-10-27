@@ -1,14 +1,14 @@
 <?php
 
-namespace Travellab\Mail;
+namespace Medom\Mail;
 
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Travellab\Modules\Booking\Models\Order;
-use Travellab\Modules\Setting\Models\AmadeusAirline;
+use Medom\Modules\Booking\Models\Order;
+use Medom\Modules\Setting\Models\AmadeusAirline;
 
 class OrderCreationMailable extends Mailable
 {
@@ -85,7 +85,7 @@ class OrderCreationMailable extends Mailable
 
         return $this
             ->view('mails.order2',["order"=>(object)$orderDetails])
-            ->subject("Travellab Order Confirmation");
+            ->subject("Medom Order Confirmation");
 
     }
 }
