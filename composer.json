@@ -21,7 +21,7 @@
         "spatie/laravel-fractal": "^5.3",
         "symfony/psr-http-message-bridge": "^1.0",
         "tymon/jwt-auth": "^1.0.0",
-        "unicodeveloper/laravel-paystack": "^1.0"
+        "unicodeveloper/laravel-paystack": " ^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
