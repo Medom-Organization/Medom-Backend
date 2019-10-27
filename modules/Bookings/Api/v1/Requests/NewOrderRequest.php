@@ -16,19 +16,22 @@ class NewOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'price_info' => 'required',
-            'booking_reference' => 'required',
-            'ticket_time_limit' => 'required',
-            'total_travellers' => 'required',
-            'traveller_stats' => 'required',
-            'travellers' => 'required',
-            'from' => 'required',
-            'to' => 'required',
-            'departure_city' => 'required',
-            'destination_city' => 'required',
-            'flight_info' => 'required',
-            'departure_date' => 'required',
-            'return_date' => 'required'
+            // 'price_info' => 'required',
+            // 'booking_reference' => 'required',
+            // 'ticket_time_limit' => 'required',
+            // 'total_travellers' => 'required',
+            // 'traveller_stats' => 'required',
+            // 'travellers' => 'required',
+            // 'from' => 'required',
+            // 'to' => 'required',
+            // 'departure_city' => 'required',
+            // 'destination_city' => 'required',
+            // 'flight_info' => 'required',
+            // 'departure_date' => 'required',
+            // 'return_date' => 'required'
+            'hospital_id' => 'required',
+            'time' => 'required',
+            'date' => 'required',
         ];
     }
 }

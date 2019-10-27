@@ -1,35 +1,28 @@
 <?php
 
-namespace Travellab\Modules\Booking\Api\v1\Repositories;
+namespace Medom\Modules\Booking\Api\v1\Repositories;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Travellab\Mail\FlightTicketMailable;
-use Travellab\Mail\OrderCreationMailable;
-use Travellab\Modules\Auth\Api\v1\Repositories\AuthRepository;
-use Travellab\Modules\BaseRepository;
-use Travellab\Modules\Booking\Models\Flight;
-use Travellab\Modules\Booking\Models\Order;
-use Travellab\Modules\Booking\Models\Payment;
-use Travellab\Modules\NameTrimmer;
+// use Medom\Mail\FlightTicketMailable;
+use Medom\Mail\OrderCreationMailable;
+use Medom\Modules\Auth\Api\v1\Repositories\AuthRepository;
+use Medom\Modules\BaseRepository;
+use Medom\Modules\Booking\Models\Order;
+use Medom\Modules\Booking\Models\Payment;
+use Medom\Modules\NameTrimmer;
 
 class OrderRepository extends BaseRepository
 {
     private $orderModel;
-    private $flightModel;
     private $authRepo;
 
     public function __construct()
     {
         $this->orderModel = new Order;
-        $this->flightModel = new Flight;
         $this->authRepo = new AuthRepository;
-
-        $this->amadeusBaseUrl = env("AMADEUS_BASEURL", 'https://staging-ws.epower.amadeus.com/WSTRAVELAB');
-        $this->amadeusUsername = env("AMADEUS_USER");
-        $this->amadeusPassword = env("AMADEUS_PASS");
     }
 
     public function create($data)
@@ -78,20 +71,6 @@ class OrderRepository extends BaseRepository
                 'currency' => $data->price_info['ItinTotalFare']['TotalFare']['_attributes']['Currency'],
                 'status' => 'pending payment',
                 'user_id' => $user->_id,
-            ]);
-
-            $flight = Flight::create([
-                'order_id' => $order->_id,
-                'air_itinerary' => $data->flight_info['AirItinerary'],
-                'booking_reference_id' => $data->flight_info['BookingReferenceID'],
-                'flight_mini_rules' => $data->flight_info['FlightMiniRules'],
-                'fulfillment' => $data->flight_info['Fulfillment'],
-                'pnr_remarks' => $data->flight_info['PNRRemarks'],
-                'price_info' => $data->flight_info['PriceInfo'],
-                'price_message_info' => $data->flight_info['PriceMessageInfo'],
-                'ticketing' => $data->flight_info['Ticketing'],
-                'traveler_info' => $data->flight_info['TravelerInfo'],
-                'status' => 'pending',
             ]);
         }
 
@@ -155,12 +134,6 @@ class OrderRepository extends BaseRepository
 
     public function verifyPayment($reference)
     {
-
-
-
-
-
-
         $pendingPayment = Payment::where(['reference' => $reference, 'status' => 'pending'])->first();
 
         if (!$pendingPayment) {
@@ -268,26 +241,26 @@ class OrderRepository extends BaseRepository
         }
     }
 
-    public function sendTicketEmail(Order $order)
-    {
+    // public function sendTicketEmail(Order $order)
+    // {
 
 
-        try {
+    //     try {
 
-            Mail::to($order->email)->later(now()->addSecond(5), new FlightTicketMailable($order));
+    //         Mail::to($order->email)->later(now()->addSecond(5), new FlightTicketMailable($order));
 
-            if (count(Mail::failures()) < 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (\Exception $e) {
+    //         if (count(Mail::failures()) < 1) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     } catch (\Exception $e) {
 
-            print $e->getMessage();
+    //         print $e->getMessage();
 
-            return false;
-        }
-    }
+    //         return false;
+    //     }
+    // }
 
     public function createTicket($data)
     {
