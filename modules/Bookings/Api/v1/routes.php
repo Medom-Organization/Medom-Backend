@@ -26,8 +26,8 @@ $api->version('v1', [], function ($api) {
                 $api->get("/payment/verify/{ref}", 'OrderController@verifyPayment');
                 $api->get("/payment/all", 'OrderController@allPayment');
 
-                $api->post('/create-ticket', 'OrderController@createTicket');
-                $api->post('/confirm-booking/{orderId}', 'OrderController@confirmBooking');
+                // $api->post('/create-ticket', 'OrderController@createTicket');
+                // $api->post('/confirm-booking/{orderId}', 'OrderController@confirmBooking');
             });
         });
     });
