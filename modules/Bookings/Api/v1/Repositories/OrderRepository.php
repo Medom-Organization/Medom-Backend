@@ -30,6 +30,7 @@ class OrderRepository extends BaseRepository
 
 
         $order = Order::create([
+            'id' => $this->generateUuid(),
             'booking_id' => $this->generateBookingId(),
             'price_info' => $data->price_info,
             'surname' => $user->surname,

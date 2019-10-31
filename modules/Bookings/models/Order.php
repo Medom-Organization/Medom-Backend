@@ -8,6 +8,7 @@ class Order extends Model
 {
 
     protected $fillable = [
+        'id',
         'booking_id',
         'first_name',
         'surname',
