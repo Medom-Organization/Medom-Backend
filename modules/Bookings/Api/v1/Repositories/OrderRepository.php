@@ -25,8 +25,24 @@ class OrderRepository extends BaseRepository
 
     public function create($data)
     {
-        // $email = $data->travellers[0]['email'];
-        $user = auth()->user();
+        $email = $data->email;
+        $user=$this->authRepo->getUserByEmail($email);
+        // $user = auth()->user();
+
+        if (!$user) {
+            $newPassword = str_random(8);
+
+            $userData = [
+                'last_name' => $data->surname,
+                'first_name' => $data->first_name,
+                'email' => $data->email,
+                'password' => $newPassword,
+            ];
+
+            $user = $this->authRepo->createUser($userData);
+        }
+
+        
 
 
         $order = Order::create([

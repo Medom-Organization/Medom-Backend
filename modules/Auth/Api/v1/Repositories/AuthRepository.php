@@ -45,18 +45,20 @@ class AuthRepository extends BaseRepository
         }
     }
 
-    public function createUser($data, $profile_picture, $role_id = null)
+    public function createUser($data, $profile_picture=null, $role_id = null)
     {
         if (!$role_id)
             $role = $this->roleModel->where('name', 'user')->first();
         $role_id = $role->id;
+        dd($profile_picture);
         // dd($role->id);
         // return Role::all();
         $user = $this->userModel->create([
             'id' => $this->generateUuid(),
             'email' => $data['email'],
             'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
+            'other_names' => $data['other_names'],
+            'surname' => $data['surname'],
             'role_id' => $role_id,
             'role' => $role->name,
             'password' => bcrypt($data['password']),
