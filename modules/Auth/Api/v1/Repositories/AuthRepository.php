@@ -84,7 +84,7 @@ class AuthRepository extends BaseRepository
             $user = $this->userModel->create([
                 'id' => $this->generateUuid(),
                 'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
+                'surname' => $data['surname'],
                 'email' => $data['email'],
                 'role_id' => $role_id,
                 'password' => bcrypt($data['password']),
