@@ -43,7 +43,7 @@
                 <tr>
                     <td style="padding-top: 10px; font-weight: 300; line-height: 36px; font-size: 18px; font-family: 'Open Sans',Helvetica,Arial,sans-serif; color: #666; letter-spacing: -1px;">
                         <p class="default-color"><b>Dear {{$user->first_name}},</b></p>
-                        <p>Thank you for signing up. Your account was created successfully , your default password is  <b>{{$password}}</b> 
+                        <p>Thank you for signing up. Your account was created successfully , your default password is  <b>{{$password}}</b>
                         </p>
                     </td>
                 </tr>
@@ -117,7 +117,7 @@
 
                 <tr>
                     <td>
-                        <p>Thank you for patronizing us</p>
+                        <p>Thank you for joining us</p>
                         <br>
 
                         <p><b>Medom Support Team</b></p>
