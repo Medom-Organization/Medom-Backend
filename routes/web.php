@@ -14,3 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/welcome', function () {
+    return view('mails.user-welcome');
+});
+
+Route::get('/password/reset', function () {
+
+    return view('mails.password-reset');
+})->name('password-reset');
+
+Route::get('/order', function () {
+    return view('mails.order2');
+});
