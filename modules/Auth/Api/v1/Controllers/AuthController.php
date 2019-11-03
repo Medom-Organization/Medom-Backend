@@ -58,7 +58,8 @@ class AuthController extends BaseController
 
         ]);
         // dd($request->logo);
-        $profile_picture = $request->logo->store('Profiles');
+        // $image = $data['photo']->store('blogimages', 'public');
+        $profile_picture = $request->logo->store('Profiles', 'public');
         $user = $this->authRepo->createUser($request, $profile_picture);
         return $user;
     }
@@ -70,9 +71,9 @@ class AuthController extends BaseController
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000'
 
         ]);
-        $profile_picture = $request->profile_picture->store('Profiles');
+        $profile_picture = $request->profile_picture->store('Profiles', 'public');
 
-        $logo = $request->logo->store('logos');
+        $logo = $request->logo->store('logos', 'public');
         $check = $this->authRepo->createHospital($request, $profile_picture, $logo);
         if ($check) {
             return $check;

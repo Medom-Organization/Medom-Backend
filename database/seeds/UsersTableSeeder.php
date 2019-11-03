@@ -16,28 +16,28 @@ class UsersTableSeeder extends Seeder
     {
         echo "Seeding Roles Started" . PHP_EOL;
         Role::updateOrCreate(
-            ['id' => Uuid::uuid4()->toString(), 'name' => 'superadmin', 'display_name' => "Super Administrator", "description"=>'arole'],
+            ['id' => Uuid::uuid4()->toString(), 'name' => 'superadmin', 'display_name' => "Super Administrator", "description" => 'arole'],
             ['name' => "superadmin"]
         );
 
         Role::updateOrCreate(
-            ['id' => Uuid::uuid4()->toString(), 'name' => 'hospitaladmin', 'display_name' => "Hospital", "description"=>'arole'],
+            ['id' => Uuid::uuid4()->toString(), 'name' => 'hospitaladmin', 'display_name' => "Hospital", "description" => 'arole'],
             ['name' => "hospitaladmin"]
         );
         Role::updateOrCreate(
-            ['id' => Uuid::uuid4()->toString(), 'name' => 'hospitalprofessional', 'display_name' => "HospitalProfessional", "description"=>'arole'],
+            ['id' => Uuid::uuid4()->toString(), 'name' => 'hospitalprofessional', 'display_name' => "HospitalProfessional", "description" => 'arole'],
             ['name' => "hospitalprofessional"]
         );
         Role::updateOrCreate(
-            ['id' => Uuid::uuid4()->toString(), 'name' => 'hospitalstaff', 'display_name' => "HospitalStaff", "description"=>'arole'],
+            ['id' => Uuid::uuid4()->toString(), 'name' => 'hospitalstaff', 'display_name' => "HospitalStaff", "description" => 'arole'],
             ['name' => "hospitalstaff"]
         );
         Role::updateOrCreate(
-            ['id' => Uuid::uuid4()->toString(), 'name' => 'unverifiedProfessional', 'display_name' => "unverifiedProfessional", "description"=>'arole'],
+            ['id' => Uuid::uuid4()->toString(), 'name' => 'unverifiedProfessional', 'display_name' => "unverifiedProfessional", "description" => 'arole'],
             ['name' => "unverifiedProfessional"]
         );
         Role::updateOrCreate(
-            ['id' => Uuid::uuid4()->toString(), 'name' => 'user', 'display_name' => "Registered User", "description"=>'arole'],
+            ['id' => Uuid::uuid4()->toString(), 'name' => 'user', 'display_name' => "Registered User", "description" => 'arole'],
             ['name' => "user"]
         );
         echo "Seeding Roles Finished" . PHP_EOL;
@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => Uuid::uuid4()->toString(),
                 'first_name' => 'Daniel',
-                'last_name' => "Mabadeje",
+                'surname' => "Mabadeje",
                 'role_id' => $superadmin->id,
                 'email' => 'superadmin@medom.ng',
                 'role' => $superadmin->name,
@@ -61,7 +61,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => Uuid::uuid4()->toString(),
                 'first_name' => 'Dynasty',
-                'last_name' => "Emmanuel",
+                'surname' => "Emmanuel",
                 'role_id' => $superadmin->id,
                 'role' => $superadmin->name,
                 'email' => 'dynasty@medom.ng',
