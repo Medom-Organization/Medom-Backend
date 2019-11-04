@@ -23,36 +23,4 @@ class Order extends Model
         'date',
         'time'
     ];
-
-    // public function flight()
-    // {
-    //     return $this->hasOne('\Travellab\Modules\Booking\Models\FLight');
-    // }
-
-
-    //    public function getFromAttribute($from){
-    //
-    //        var_dump($from);
-    ////        $airline = AmadeusAirline::find($from->id);
-    //
-    //      return  (object) ["airline",$from];
-    //
-    //    }
-
-
-    //    public function getToAttribute($to){
-    //        $airline = AmadeusAirline::find($to->id);
-    //
-    //
-    //      return   (object) ["airline"=>$airline,$to];
-    //    }
-
-
-
-
-
-
-
-
-
 }
