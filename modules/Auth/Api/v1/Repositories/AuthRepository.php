@@ -45,7 +45,7 @@ class AuthRepository extends BaseRepository
         }
     }
 
-    public function createUser($data, $profile_picture=null, $role_id = null)
+    public function createUser($data, $profile_picture = null, $role_id = null)
     {
         if (!$role_id)
             $role = $this->roleModel->where('name', 'user')->first();
@@ -68,7 +68,7 @@ class AuthRepository extends BaseRepository
         if (!$user)
             return false;
 
-        // $this->sendWelcomeEmail($user, $data['password']);
+        $this->sendWelcomeEmail($user, $data['password']);
         return $user;
     }
 
@@ -118,7 +118,7 @@ class AuthRepository extends BaseRepository
             if (!$user)
                 return false;
 
-            // $this->sendWelcomeEmail($user, $data['password']);
+            $this->sendWelcomeEmail($user, $data['password']);
             return array('user' => $user, 'hospital' => $hospital);
         } else {
             return false;
@@ -144,5 +144,4 @@ class AuthRepository extends BaseRepository
         $user = $this->userModel->where('email', $email)->first();
         return $user;
     }
-
 }
