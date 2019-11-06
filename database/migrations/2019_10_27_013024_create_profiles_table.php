@@ -20,6 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('bookings');
             $table->string('genotype')->nullable();
             $table->string('blood_group')->nullable();
+            $table->string('wallet');
             $table->string('allergies')->nullable();
 
             $table->timestamps();

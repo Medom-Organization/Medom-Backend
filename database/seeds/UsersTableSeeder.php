@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Medom\Modules\Auth\Models\Role;
 use Medom\Modules\Auth\Models\User;
+use Medom\Modules\Auth\Models\Profile;
 use Ramsey\Uuid\Uuid;
 
 class UsersTableSeeder extends Seeder
@@ -45,7 +46,7 @@ class UsersTableSeeder extends Seeder
         // Seeding users
         echo "Seeding Users Started" . PHP_EOL;
         $superadmin = Role::where('name', 'superadmin')->first();
-        User::updateOrCreate(
+        $user = User::updateOrCreate(
             [
                 'id' => Uuid::uuid4()->toString(),
                 'first_name' => 'Daniel',
@@ -57,18 +58,10 @@ class UsersTableSeeder extends Seeder
             ],
             ['email' => "superadmin@medom.ng"]
         );
-        User::updateOrCreate(
-            [
-                'id' => Uuid::uuid4()->toString(),
-                'first_name' => 'Dynasty',
-                'surname' => "Emmanuel",
-                'role_id' => $superadmin->id,
-                'role' => $superadmin->name,
-                'email' => 'dynasty@medom.ng',
-                'password' => bcrypt('password')
-            ],
-            ['email' => "dynasty@medom.ng"]
-        );
+        Profile::updateOrCreate([
+            'id'=>Uuid::uuid4()->toString(),
+            'wallet'=>'0'
+        ]);
         echo "Seeding Users Finished" . PHP_EOL;
     }
 }
