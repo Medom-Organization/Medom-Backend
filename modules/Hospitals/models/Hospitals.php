@@ -13,7 +13,7 @@ class Hospitals extends Model
      *
      * @var array
      */
-    protected $fillable = ['hospital_id', 'hospital_name', 'email', "address", 'phone_no', 'certificate_no', 'logo', 'user_id'];
+    protected $fillable = ['hospital_id', 'hospital_name', 'email', "address", 'phone_no', 'certificate_no', 'logo', 'user_id', 'wallet'];
 
     public $incrementing = false;
 }
