@@ -55,11 +55,11 @@ class UsersTableSeeder extends Seeder
                 'email' => 'superadmin@medom.ng',
                 'role' => $superadmin->name,
                 'password' => bcrypt('password')
-            ],
-            ['email' => "superadmin@medom.ng"]
+            ]
         );
         Profile::updateOrCreate([
             'id'=>Uuid::uuid4()->toString(),
+            'user_id'=>$user->id,
             'wallet'=>'0'
         ]);
         echo "Seeding Users Finished" . PHP_EOL;

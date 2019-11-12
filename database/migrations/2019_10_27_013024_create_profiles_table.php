@@ -17,7 +17,7 @@ class CreateProfilesTable extends Migration
             $table->string('id');
             $table->primary('id');
             $table->string('user_id');
-            $table->string('bookings');
+            $table->string('bookings')->nullable();
             $table->string('genotype')->nullable();
             $table->string('blood_group')->nullable();
             $table->string('wallet');
