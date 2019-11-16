@@ -33,6 +33,8 @@ class HospitalRegistrationRequest extends FormRequest
             'address' => 'required',
             'phone_no' => 'required',
             'certificate_no' => 'required',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000'
         ];
     }
 

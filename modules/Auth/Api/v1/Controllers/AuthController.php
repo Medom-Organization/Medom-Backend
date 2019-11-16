@@ -63,12 +63,12 @@ class AuthController extends BaseController
     }
     public function registerHospital(HospitalRegistrationRequest $request)
     {
-        $this->validate($request, [
+        // $this->validate($request, [
 
-            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000'
+        //     'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000',
+        //     'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000'
 
-        ]);
+        // ]);
         $profile_picture = $request->profile_picture->store('profiles', 'public');
 
         $logo = $request->logo->store('logos', 'public');
