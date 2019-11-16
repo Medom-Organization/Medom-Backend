@@ -92,7 +92,9 @@ return [
             'password' => $password,
             'charset'  => 'utf8',
             'prefix'   => '',
-            'schema'   => 'public',
+            'prefix_indexes' => true,
+            'schema' => 'public',
+            'sslmode' => 'prefer',
         ],
 
         'sqlsrv' => [
