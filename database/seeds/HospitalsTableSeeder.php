@@ -15,21 +15,21 @@ class HospitalsTableSeeder extends Seeder
     {
         echo "Seeding Hospitals Started" . PHP_EOL;
         Settingshospital::updateOrCreate(
-            ['hid' => Uuid::uuid4()->toString(), 'hospitalname' => 'University Of Uyo Teaching Hospital']
+            ['hid' => '40201ce1-ad91-4a71-81d1-dd600de03c0a', 'hospitalname' => 'University Of Uyo Teaching Hospital']
         );
 
         Settingshospital::updateOrCreate(
-            ['hid' => Uuid::uuid4()->toString(), 'hospitalname' => 'Lagos University Teaching Hospital']
+            ['hid' => 'Uuid::uuid4()->toString()', 'hospitalname' => 'Lagos University Teaching Hospital']
         );
         Settingshospital::updateOrCreate(
-            ['hid' => Uuid::uuid4()->toString(), 'hospitalname' => "St.Luke's Hospital, Anua Uyo"]
+            ['hid' => 'd6b832ce-b4c1-4cbc-8b69-026bc058624c', 'hospitalname' => "St.Luke's Hospital, Anua Uyo"]
         );
         Settingshospital::updateOrCreate(
-            ['hid' => Uuid::uuid4()->toString(), 'hospitalname' => 'General Hospital, Itu']
+            ['hid' => '9b24f140-ac65-44e2-a602-d01a46030e3c', 'hospitalname' => 'General Hospital, Itu']
         );
         Settingshospital::updateOrCreate(
-            ['hid' => Uuid::uuid4()->toString(), 'hospitalname' => 'Medom Hospital']
+            ['hid' => '33325d4c-bd21-4429-9c51-88658dd546c7', 'hospitalname' => 'Medom Hospital']
         );
         echo "Seeding Hospitals Finished" . PHP_EOL;
     }
-    }
+}
