@@ -66,7 +66,7 @@ class AuthRepository extends BaseRepository
             'password' => bcrypt($data['password']),
             'profile_picture' => $profile_picture
         ]);
-        $profile=$this->userModel->create([
+        $profile=$this->profileModel->create([
             'id' => $this->generateUuid(),
             'user_id' => $user->id,
             'bookings'=>0,
@@ -100,7 +100,7 @@ class AuthRepository extends BaseRepository
                 'role' => $role->name,
                 'profile_picture' => $profile_picture
             ]);
-            $profile=$this->userModel->create([
+            $profile=$this->profileModel->create([
                 'id' => $this->generateUuid(),
                 'user_id' => $user->id,
                 'bookings'=>0,
@@ -155,6 +155,35 @@ class AuthRepository extends BaseRepository
         $user->last_name = $data->last_name ? $data->last_name : $user->last_name;
 
         return $user->save() ? $user : false;
+    }
+    public function updateProfile($data)
+    {
+        if (is_array($data))
+            $data = (object) $data;
+
+        $user = auth()->user();
+        $profile=$this->profileModel->where('user_id', $user->id)->update([
+            'phone_no'=>$data['phone_no'],
+            'marital_status'=>$data['marital_status'],
+            'DOB'=>$data['DOB'],
+            'address'=>$data['address'],
+            'genotype'=>$data['genotype'],
+            'blood_group'=>$data['blood_group'],
+            'height'=>$data['height'],
+            'weight'=>$data['weight'],
+            'religion'=>$data['religion'],
+            'next of kin'=>$data['next of kin'],
+        ]);
+        if ($profile) {
+            return true;
+        } else {
+            return false;
+        }
+
+        // $user->first_name = $data->first_name ? $data->first_name : $user->first_name;
+        // $user->last_name = $data->last_name ? $data->last_name : $user->last_name;
+
+        // return $user->save() ? $user : false;
     }
     public function getUserByEmail($email)
     {

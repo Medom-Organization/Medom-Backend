@@ -24,8 +24,18 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-           'first_name'=>'required',
-            'last_name'=>'required'
+           'phone_no'=>'required',
+            'marital_status'=>'required',
+            'DOB'=>'required',
+            'address'=>'required',
+            'genotype'=>'required',
+            'blood_group'=>'required',
+            'height'=>'required',
+            'weight'=>'required',
+            'religion'=>'required',
+            'next of kin'=>'required',
+            // 'height'=>'required',
+            // 'weight'=>'required'
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Medom\Modules\Auth\Api\v1\Controllers;
 
+use Medom\Modules\Auth\Api\v1\Requests\updateAccountRequest;
 use Medom\Modules\Auth\Api\v1\Requests\UpdateProfileRequest;
 use Medom\Modules\BaseController;
 use Medom\Modules\Auth\Api\v1\Repositories\AuthRepository;
@@ -80,10 +81,19 @@ class AuthController extends BaseController
         }
     }
 
-    public function updateProfile(UpdateProfileRequest $request)
+    public function updateAccount(updateAccountRequest $request)
     {
 
         $user = $this->authRepo->updateAccount($request->all());
+
+        if ($user)
+            return $this->transform($user, $this->userTransformer);
+
+        return $this->error("Unable to update user profile");
+    }
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $user = $this->authRepo->updateProfile($request->all());
 
         if ($user)
             return $this->transform($user, $this->userTransformer);
