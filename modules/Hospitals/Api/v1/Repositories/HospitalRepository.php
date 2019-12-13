@@ -3,7 +3,7 @@
 namespace Medom\Modules\Hospitals\Api\v1\Repositories;
 
 
-use DB;
+// use  DB;
 use Ramsey\Uuid\Uuid;
 use Medom\Mail\UserWelcomeMail;
 use Medom\Modules\BaseRepository;

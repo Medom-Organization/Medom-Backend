@@ -26,7 +26,7 @@ class OrderRepository extends BaseRepository
     public function create($data)
     {
         $email = $data->email;
-        $user=$this->authRepo->getUserByEmail($email);
+        $user = $this->authRepo->getUserByEmail($email);
         // $user = auth()->user();
 
         if (!$user) {
@@ -42,7 +42,7 @@ class OrderRepository extends BaseRepository
             $user = $this->authRepo->createUser($userData);
         }
 
-        
+
 
 
         $order = Order::create([
@@ -175,7 +175,7 @@ class OrderRepository extends BaseRepository
         if ($order) {
             $order->status = 'confirmed';
             $order->save();
-            $this->sendTicketEmail($order);
+            // $this->sendTicketEmail($order);
 
             return response()->json(["status" => "success", "message" => "Booking confirmed"]);
         }
@@ -235,7 +235,7 @@ class OrderRepository extends BaseRepository
         $order = $this->orderModel->where('user_id', $user->id)->get();
         return $order;
     }
-    public function allPayment(Request $request)
+    public function allPayment()
     {
         $user = auth()->user();
         return Payment::where('user_id', $user->_id)->paginate(10);

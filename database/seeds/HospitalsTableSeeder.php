@@ -20,7 +20,7 @@ class HospitalsTableSeeder extends Seeder
         echo "Seeded University Of Uyo Teaching Hospital" . PHP_EOL;
 
         Settingshospital::updateOrCreate(
-            ['hid' => 'Uuid::uuid4()->toString()', 'hospitalname' => 'Lagos University Teaching Hospital']
+            ['hid' => 'd6b832ce-b4c1-4cbc-8b69-026bc058624c', 'hospitalname' => 'Lagos University Teaching Hospital']
         );
         Settingshospital::updateOrCreate(
             ['hid' => 'd6b832ce-b4c1-4cbc-8b69-026bc058624c', 'hospitalname' => "St.Luke's Hospital, Anua Uyo"]
