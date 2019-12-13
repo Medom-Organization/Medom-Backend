@@ -26,6 +26,7 @@ class BlogRepository extends BaseRepository
             return response()->json(['status' => false, 'message' => 'tags are not in an array'], 500);
 
         $blog = $this->blogModel->create([
+            'id' => $this->generateUuid(),
             'title' => $data['title'],
             'truncated' => $shortdesc,
             'content' => $data['content'],
@@ -35,11 +36,13 @@ class BlogRepository extends BaseRepository
         if ($blog) {
             foreach ($data['tags'] as $tag) {
                 BlogTags::create([
+                    'id' => $this->generateUuid(),
                     'blog_id' => $blog->_id,
                     'tag' => $tag
                 ]);
             }
             BlogPhotos::create([
+                'id' => $this->generateUuid(),
                 'blog_id' => $blog->_id,
                 'photo' => $image
             ]);
@@ -53,7 +56,7 @@ class BlogRepository extends BaseRepository
     {
         $shortdesc = $this->truncateWords($data['content'], 30, "...");
         $content = $data['content'];
-        $blog = $this->blogModel->where('_id', $id)->update([
+        $blog = $this->blogModel->where('id', $id)->update([
             'title' => $data['title'],
             'truncated' => $shortdesc,
             'content' => $content
@@ -102,7 +105,7 @@ class BlogRepository extends BaseRepository
 
     public function deleteBlog($id)
     {
-        $deleteBlog = $this->blogModel->where('_id', $id)->delete();
+        $deleteBlog = $this->blogModel->where('id', $id)->delete();
         $deleteTag = $this->blogTagModel->where('blog_id', $id)->delete($id);
         $getphoto=$this->blogPhotoModel->where('blog_id', $id)->first();
         $check=   unlink('storage/' . $getphoto->photo);
