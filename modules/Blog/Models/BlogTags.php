@@ -14,5 +14,5 @@ class BlogTags extends Model
      *
      * @var array
      */
-    protected $fillable = ['blog_id', 'tag'];
+    protected $fillable = ['id','blog_id', 'tag'];
 }

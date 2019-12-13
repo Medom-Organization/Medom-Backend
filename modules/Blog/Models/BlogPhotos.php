@@ -14,5 +14,5 @@ class BlogPhotos extends Model
      *
      * @var array
      */
-    protected $fillable = ['blog_id', 'photo'];
+    protected $fillable = ['id','blog_id', 'photo'];
 }

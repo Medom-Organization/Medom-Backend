@@ -37,13 +37,13 @@ class BlogRepository extends BaseRepository
             foreach ($data['tags'] as $tag) {
                 BlogTags::create([
                     'id' => $this->generateUuid(),
-                    'blog_id' => $blog->_id,
+                    'blog_id' => $blog->id,
                     'tag' => $tag
                 ]);
             }
             BlogPhotos::create([
                 'id' => $this->generateUuid(),
-                'blog_id' => $blog->_id,
+                'blog_id' => $blog->id,
                 'photo' => $image
             ]);
             $result = array("details" => $blog, "images" => $image, "tags" => $data['tags']);
@@ -73,14 +73,14 @@ class BlogRepository extends BaseRepository
         foreach ($blogs as $blog) {
             $blog['photos'] = $this->blogPhotoModel->where('blog_id', $blog->id)->select("photo")->get();
             $blog['tags'] = $this->blogTagModel->where('blog_id', $blog->id)->select("tag")->get();
-            $blog['categoryname'] = BlogCategory::where('_id', $blog->category_id)->first();
+            $blog['categoryname'] = BlogCategory::where('id', $blog->category_id)->first();
             $result[] = $blog;
         }
         return $result;
     }
     public function getAllBlogsbyId($id)
     {
-        $blog = $this->blogModel->where('_id', $id)->get();
+        $blog = $this->blogModel->where('id', $id)->get();
         foreach ($blog as $blog) {
             $blog['photos'] = $this->blogPhotoModel->where('blog_id', $blog->id)->select("photo")->get();
             $blog['tags'] = $this->blogTagModel->where('blog_id', $blog->id)->select("tag")->get();
