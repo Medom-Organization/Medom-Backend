@@ -16,6 +16,7 @@ $api->version('v1', [], function ($api) {
             $api->post('/user/register', 'AuthController@registerUser');
             $api->post('/hospital/register', 'AuthController@registerHospital');
             $api->post('/update/profile', 'AuthController@updateProfile');
+            $api->post('/update/account', 'AuthController@updateAccount');
         });
     });
 

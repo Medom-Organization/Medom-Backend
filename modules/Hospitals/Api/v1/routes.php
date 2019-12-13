@@ -12,7 +12,7 @@ $api->version('v1', [], function ($api) {
 
                 return json_encode(['status' => 'Success', 'message' => 'Hospital Api working']);
             });
-            $api->post('/add/hospitaladmin', 'HospitalController@addHospitalAdmin')->middleware('auth')->middleware('hospitaladmin');
+            $api->post('/add/hospitaladmin/{id}', 'HospitalController@addHospitalAdmin')->middleware('auth')->middleware('hospitaladmin');
             $api->post('/add/staff/{id}', 'HospitalController@addHospitalStaff')->middleware('auth')->middleware('hospitaladmin');
             $api->post('/add/professional/{id}', 'HospitalController@addHospitalProfessional')->middleware('auth')->middleware('hospitaladmin');
             $api->get('/professional/all', 'HospitalController@getAllProfessionals');
