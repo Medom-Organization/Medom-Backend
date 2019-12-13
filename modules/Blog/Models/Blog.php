@@ -15,7 +15,7 @@ class Blog extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'truncated', 'content', 'category_id', "status"];
+    protected $fillable = ['id','title', 'truncated', 'content', 'category_id', "status"];
     // protected $with = ['category_id'];
     public function photo()
     {

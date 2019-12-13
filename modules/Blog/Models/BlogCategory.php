@@ -14,5 +14,5 @@ class BlogCategory extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', "description"];
+    protected $fillable = ['id','name', "description"];
 }
