@@ -23,7 +23,7 @@ class HospitalsTableSeeder extends Seeder
             ['hid' => 'd6b832ce-b4c1-4cbc-8b69-026bc058624c', 'hospitalname' => 'Lagos University Teaching Hospital']
         );
         Settingshospital::updateOrCreate(
-            ['hid' => 'd6b832ce-b4c1-4cbc-8b69-026bc058624c', 'hospitalname' => "St.Luke's Hospital, Anua Uyo"]
+            ['hid' => 'd6b832ce-b4c1-4cbc-8b69-026bc058624v', 'hospitalname' => "St.Luke's Hospital, Anua Uyo"]
         );
         Settingshospital::updateOrCreate(
             ['hid' => '9b24f140-ac65-44e2-a602-d01a46030e3c', 'hospitalname' => 'General Hospital, Itu']
