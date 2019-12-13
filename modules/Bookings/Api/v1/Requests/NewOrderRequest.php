@@ -20,6 +20,7 @@ class NewOrderRequest extends FormRequest
             'symptoms' => 'required',
             'booking_type' => 'required',
             'hospital_id' => 'required',
+            'description'=>'required',
             'time' => 'required',
             'date' => 'required',
         ];

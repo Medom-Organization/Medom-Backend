@@ -24,7 +24,9 @@ class CreateOrdersTable extends Migration
             $table->string('amount');
             $table->string('currency');
             $table->string('price_info');
+            $table->string('booking_type');
             $table->string('status');
+            $table->string('description');
             $table->string('user_id');
             $table->string('hospital_id');
             $table->string('date');

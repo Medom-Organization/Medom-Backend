@@ -20,6 +20,8 @@ class Order extends Model
         'status',
         'user_id',
         'hospital_id',
+        'booking_type',
+        'description',
         'date',
         'time'
     ];

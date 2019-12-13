@@ -57,7 +57,9 @@ class OrderRepository extends BaseRepository
             'currency' => $data->currency,
             'status' => 'pending payment',
             'user_id' => $user->id,
+            'booking_type'=>$data->booking_type,
             'hospital_id' => $data->hospital_id,
+            'description' => $data->description,
             'date' => $data->date,
             'time' => $data->time,
         ]);
