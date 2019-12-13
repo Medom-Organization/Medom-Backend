@@ -13,7 +13,7 @@ class CreateBlogcategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogcategory', function (Blueprint $table) {
+        Schema::create('blog_categories', function (Blueprint $table) {
             $table->string('id');
             $table->primary('id');
             $table->string('name');

@@ -121,6 +121,7 @@ class BlogRepository extends BaseRepository
     public function createBlogCategory($data)
     {
         $blog = $this->blogCategory->create([
+            'id' => $this->generateUuid(),
             'name' => $data['name'],
             'description' => $data['description']
         ]);

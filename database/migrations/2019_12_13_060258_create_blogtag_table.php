@@ -13,7 +13,7 @@ class CreateBlogtagTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogtag', function (Blueprint $table) {
+        Schema::create('blog_tags', function (Blueprint $table) {
             $table->string('id');
             $table->primary('id');
             $table->string('blog_id');

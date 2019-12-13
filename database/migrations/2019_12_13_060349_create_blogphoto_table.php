@@ -13,7 +13,7 @@ class CreateBlogphotoTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogphoto', function (Blueprint $table) {
+        Schema::create('blog_photos', function (Blueprint $table) {
             $table->string('id');
             $table->primary('id');
             $table->string('blog_id');
