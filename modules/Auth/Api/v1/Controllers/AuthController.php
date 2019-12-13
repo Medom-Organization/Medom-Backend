@@ -54,7 +54,7 @@ class AuthController extends BaseController
         $this->validate($request, [
 
             // 'po' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
         $profile_picture = $request->logo->store('profiles', 'public');

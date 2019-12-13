@@ -13,6 +13,6 @@ class Profile extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'bookings', 'genotype', 'blood_group', 'wallet', "allergies"];
+    protected $fillable = ['id', 'user_id', 'phone_no', 'marital_status', 'DOB', 'address', 'bookings', 'genotype', 'blood_group', 'wallet', 'height', 'weight', 'religion', 'next of kin', "allergies"];
     public $incrementing = false;
 }

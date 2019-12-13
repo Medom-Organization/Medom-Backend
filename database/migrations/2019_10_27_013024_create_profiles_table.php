@@ -22,6 +22,14 @@ class CreateProfilesTable extends Migration
             $table->string('blood_group')->nullable();
             $table->string('wallet');
             $table->string('allergies')->nullable();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('next of kin')->nullable();
+            $table->string('address')->nullable();
+            $table->string('DOB')->nullable();
+            $table->string('marital_status')->nullable();
+            $table->string('phone_no')->nullable();
 
             $table->timestamps();
         });

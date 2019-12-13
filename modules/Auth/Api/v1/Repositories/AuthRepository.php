@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Support\Facades\Mail;
 use Medom\Mail\UserWelcomeMail;
 use Medom\Modules\Auth\Models\Role;
+use Medom\Modules\Auth\Models\Profile;
 use Medom\Modules\Auth\Models\User;
 use Medom\Modules\Hospitals\Models\Hospitals;
 use Medom\Modules\Hospitals\Models\HospitalAdmin;
@@ -25,6 +26,7 @@ class AuthRepository extends BaseRepository
         $this->hospitalStaffModel = new HospitalStaff;
         $this->settingsHospitalModel = new Settingshospital;
         $this->hospitalAdminModel = new HospitalAdmin;
+        $this->profileModel=new Profile;
     }
 
     public function sendWelcomeEmail($user, $password)
@@ -64,6 +66,13 @@ class AuthRepository extends BaseRepository
             'password' => bcrypt($data['password']),
             'profile_picture' => $profile_picture
         ]);
+        $profile=$this->userModel->create([
+            'id' => $this->generateUuid(),
+            'user_id' => $user->id,
+            'bookings'=>0,
+            'allergies'=>0,
+            'wallet'=>0,
+        ]);
 
         if (!$user)
             return false;
@@ -91,6 +100,14 @@ class AuthRepository extends BaseRepository
                 'role' => $role->name,
                 'profile_picture' => $profile_picture
             ]);
+            $profile=$this->userModel->create([
+                'id' => $this->generateUuid(),
+                'user_id' => $user->id,
+                'bookings'=>0,
+                'allergies'=>0,
+                'wallet'=>0,
+            ]);
+    
 
             if ($user) {
                 $hospital = $this->hospitalModel->create([
