@@ -12,7 +12,7 @@ class UserTransformer extends Fractal\TransformerAbstract
         return [
           'id'=>$user->id,
           'first_name'=>$user->first_name,
-          'last_name'=>$user->last_name,
+          'surname'=>$user->surname,
           'email'=>$user->email,
           'name'=>$user->fullName(),
           'role'=>$user->role,

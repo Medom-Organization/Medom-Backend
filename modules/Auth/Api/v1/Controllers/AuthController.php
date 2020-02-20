@@ -29,7 +29,7 @@ class AuthController extends BaseController
             return $this->fail("Invalid login credentials");
         }
         $userType = $this->getUserType($request['email']);
-        // to check if the user works with a hospital 
+        // to check if the user works with a hospital
         if ($userType) {
             $data = [
                 'token' => $token,
@@ -55,23 +55,12 @@ class AuthController extends BaseController
 
     public function registerUser(RegistrationRequest $request)
     {
-
-        $this->validate($request, [
-            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-
-        ]);
-        $profile_picture = $request->logo->store('profiles', 'public');
+        $profile_picture = $request->profile_picture->store('profiles', 'public');
         $user = $this->authRepo->createUser($request, $profile_picture);
         return $user;
     }
     public function registerHospital(HospitalRegistrationRequest $request)
     {
-        // $this->validate($request, [
-
-        //     'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000',
-        //     'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100000'
-
-        // ]);
         $profile_picture = $request->profile_picture->store('profiles', 'public');
 
         $logo = $request->logo->store('logos', 'public');

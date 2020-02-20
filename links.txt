@@ -1,0 +1,2 @@
+https://medomapi.herokuapp.com/ - backend
+https://medom.netlify.com/ - frontend

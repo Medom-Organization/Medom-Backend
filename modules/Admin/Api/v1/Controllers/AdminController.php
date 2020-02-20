@@ -42,7 +42,7 @@ class AdminController extends BaseController
     {
         $this->validate($request, [
             'first_name' => 'required',
-            'last_name' => 'required',
+            'surname' => 'required',
             'email' => 'required|email',
             'role' => 'required'
         ]);

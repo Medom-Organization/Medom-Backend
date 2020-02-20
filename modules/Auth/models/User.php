@@ -61,7 +61,7 @@ class User extends Model implements
 
     public function fullName()
     {
-        return $this->first_name . " " . $this->last_name;
+        return $this->first_name . " " . $this->surname;
     }
     public function scopeType($query, $roles)
     {
