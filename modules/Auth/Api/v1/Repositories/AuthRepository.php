@@ -32,7 +32,6 @@ class AuthRepository extends BaseRepository
 
     public function sendWelcomeEmail($user, $password)
     {
-
         Mail::to($user->email)->later(now()->addSecond(5), new UserWelcomeMail($user, $password));
     }
     public function sendHospitalWelcomeEmail($user, $password)
@@ -58,32 +57,7 @@ class AuthRepository extends BaseRepository
         if (!$role_id)
             $role = $this->roleModel->where('name', 'user')->first();
         $role_id = $role->id;
-        dd($profile_picture);
-
-        $user = $this->userModel->create([
-            'id' => $this->generateUuid(),
-            'email' => $data['email'],
-            'first_name' => $data['first_name'],
-            'other_names' => $data['other_names'],
-            'surname' => $data['surname'],
-            'role_id' => $role_id,
-            'role' => $role->name,
-            'password' => bcrypt($data['password']),
-            'profile_picture' => $profile_picture
-        ]);
-        $profile = $this->profileModel->create([
-            'id' => $this->generateUuid(),
-            'user_id' => $user->id,
-            'bookings' => 0,
-            'allergies' => 0,
-            'wallet' => 0,
-        ]);
-
-        if (!$user)
-            return false;
-
-        $this->sendWelcomeEmail($user, $data['password']);
-        return $user;
+        return $this->InsertUser($data,$role,$profile_picture);
     }
 
     public function createHospital($data, $profile_picture, $logo, $role_id = null)
@@ -91,32 +65,11 @@ class AuthRepository extends BaseRepository
         $validatehospitalname = Settingshospital::where('hospitalname', $data['hospitalname'])->first();
         $validatehospitalid = Settingshospital::where('hid', $data['certificate_no'])->first();
 
-
-
         if (($validatehospitalname->hospitalname && $validatehospitalid->hid) !== null) {
             if (!$role_id) {
                 $role = $this->roleModel->where('name', 'hospitaladmin')->first();
-                $role_id = $role->id;
             }
-            $user = $this->userModel->create([
-                'id' => $this->generateUuid(),
-                'first_name' => $data['first_name'],
-                'surname' => $data['surname'],
-                'email' => $data['email'],
-                'role_id' => $role_id,
-                'password' => bcrypt($data['password']),
-                'role' => $role->name,
-                'profile_picture' => $profile_picture
-            ]);
-            $profile = $this->profileModel->create([
-                'id' => $this->generateUuid(),
-                'user_id' => $user->id,
-                'bookings' => 0,
-                'allergies' => 0,
-                'wallet' => 0,
-            ]);
-
-
+            $user = $this->InsertUser($data,$role,$profile_picture);
             if ($user) {
                 $hospital = $this->hospitalModel->create([
                     'hospital_id' => $this->generateUuid(),
@@ -160,7 +113,7 @@ class AuthRepository extends BaseRepository
         $user = auth()->user();
 
         $user->first_name = $data->first_name ? $data->first_name : $user->first_name;
-        $user->last_name = $data->last_name ? $data->last_name : $user->last_name;
+        $user->surname = $data->surname ? $data->surname : $user->surname;
 
         return $user->save() ? $user : false;
     }
@@ -196,6 +149,33 @@ class AuthRepository extends BaseRepository
     public function getUserByEmail($email)
     {
         $user = $this->userModel->where('email', $email)->first();
+        return $user;
+    }
+    public function InsertUser($data,$role,$profile_picture)
+    {
+        $user = $this->userModel->create([
+            'id' => $this->generateUuid(),
+            'email' => $data['email'],
+            'first_name' => $data['first_name'],
+            'other_names' => $data['other_names'],
+            'surname' => $data['surname'],
+            'role_id' => $role->id,
+            'role' => $role->name,
+            'password' => bcrypt($data['password']),
+            'profile_picture' => $profile_picture
+        ]);
+        $profile = $this->profileModel->create([
+            'id' => $this->generateUuid(),
+            'user_id' => $user->id,
+            'bookings' => 0,
+            'allergies' => 0,
+            'wallet' => 0,
+        ]);
+
+        if (!$user)
+            return false;
+
+        $this->sendWelcomeEmail($user, $data['password']);
         return $user;
     }
 }

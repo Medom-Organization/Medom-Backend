@@ -26,6 +26,7 @@ class HospitalRegistrationRequest extends FormRequest
         return [
             'first_name' => 'required',
             'surname' => 'required',
+            'other_names' =>'required',
             'email' => 'required|email',
             'password' => 'required',
             'hospitalname' => 'required',
