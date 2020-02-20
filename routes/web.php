@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('mails.user-welcome');
 });
+Route::get('/hospital/welcome', function () {
+    return view('mails.hospital-welcome');
+});
 
 Route::get('/password/reset', function () {
 

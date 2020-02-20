@@ -6,6 +6,7 @@ namespace Medom\Modules\Auth\Api\v1\Repositories;
 use DB;
 use Illuminate\Support\Facades\Mail;
 use Medom\Mail\UserWelcomeMail;
+use Medom\Mail\HospitalWelcomeMail;
 use Medom\Modules\Auth\Models\Role;
 use Medom\Modules\Auth\Models\Profile;
 use Medom\Modules\Auth\Models\User;
@@ -26,13 +27,18 @@ class AuthRepository extends BaseRepository
         $this->hospitalStaffModel = new HospitalStaff;
         $this->settingsHospitalModel = new Settingshospital;
         $this->hospitalAdminModel = new HospitalAdmin;
-        $this->profileModel=new Profile;
+        $this->profileModel = new Profile;
     }
 
     public function sendWelcomeEmail($user, $password)
     {
 
         Mail::to($user->email)->later(now()->addSecond(5), new UserWelcomeMail($user, $password));
+    }
+    public function sendHospitalWelcomeEmail($user, $password)
+    {
+
+        Mail::to($user->email)->later(now()->addSecond(5), new HospitalWelcomeMail($user, $password));
     }
     public function getUserType($email)
     {
@@ -53,8 +59,7 @@ class AuthRepository extends BaseRepository
             $role = $this->roleModel->where('name', 'user')->first();
         $role_id = $role->id;
         dd($profile_picture);
-        // dd($role->id);
-        // return Role::all();
+
         $user = $this->userModel->create([
             'id' => $this->generateUuid(),
             'email' => $data['email'],
@@ -66,12 +71,12 @@ class AuthRepository extends BaseRepository
             'password' => bcrypt($data['password']),
             'profile_picture' => $profile_picture
         ]);
-        $profile=$this->profileModel->create([
+        $profile = $this->profileModel->create([
             'id' => $this->generateUuid(),
             'user_id' => $user->id,
-            'bookings'=>0,
-            'allergies'=>0,
-            'wallet'=>0,
+            'bookings' => 0,
+            'allergies' => 0,
+            'wallet' => 0,
         ]);
 
         if (!$user)
@@ -85,6 +90,9 @@ class AuthRepository extends BaseRepository
     {
         $validatehospitalname = Settingshospital::where('hospitalname', $data['hospitalname'])->first();
         $validatehospitalid = Settingshospital::where('hid', $data['certificate_no'])->first();
+
+
+
         if (($validatehospitalname->hospitalname && $validatehospitalid->hid) !== null) {
             if (!$role_id) {
                 $role = $this->roleModel->where('name', 'hospitaladmin')->first();
@@ -100,14 +108,14 @@ class AuthRepository extends BaseRepository
                 'role' => $role->name,
                 'profile_picture' => $profile_picture
             ]);
-            $profile=$this->profileModel->create([
+            $profile = $this->profileModel->create([
                 'id' => $this->generateUuid(),
                 'user_id' => $user->id,
-                'bookings'=>0,
-                'allergies'=>0,
-                'wallet'=>0,
+                'bookings' => 0,
+                'allergies' => 0,
+                'wallet' => 0,
             ]);
-    
+
 
             if ($user) {
                 $hospital = $this->hospitalModel->create([
@@ -135,14 +143,14 @@ class AuthRepository extends BaseRepository
             if (!$user)
                 return false;
 
-            $this->sendWelcomeEmail($user, $data['password']);
+            $this->sendHospitalWelcomeEmail($user, $data['password']);
             return array('user' => $user, 'hospital' => $hospital);
         } else {
             return false;
         }
     }
 
-
+    //update account
 
     public function updateAccount($data)
     {
@@ -156,35 +164,35 @@ class AuthRepository extends BaseRepository
 
         return $user->save() ? $user : false;
     }
+
+
+    //update profile
     public function updateProfile($data)
     {
         if (is_array($data))
             $data = (object) $data;
 
         $user = auth()->user();
-        $profile=$this->profileModel->where('user_id', $user->id)->update([
-            'phone_no'=>$data['phone_no'],
-            'marital_status'=>$data['marital_status'],
-            'DOB'=>$data['DOB'],
-            'address'=>$data['address'],
-            'genotype'=>$data['genotype'],
-            'blood_group'=>$data['blood_group'],
-            'height'=>$data['height'],
-            'weight'=>$data['weight'],
-            'religion'=>$data['religion'],
-            'next of kin'=>$data['next of kin'],
+        $profile = $this->profileModel->where('user_id', $user->id)->update([
+            'phone_no' => $data['phone_no'],
+            'marital_status' => $data['marital_status'],
+            'DOB' => $data['DOB'],
+            'address' => $data['address'],
+            'genotype' => $data['genotype'],
+            'blood_group' => $data['blood_group'],
+            'height' => $data['height'],
+            'weight' => $data['weight'],
+            'religion' => $data['religion'],
+            'next of kin' => $data['next of kin'],
         ]);
         if ($profile) {
             return true;
         } else {
             return false;
         }
-
-        // $user->first_name = $data->first_name ? $data->first_name : $user->first_name;
-        // $user->last_name = $data->last_name ? $data->last_name : $user->last_name;
-
-        // return $user->save() ? $user : false;
     }
+
+    //get by email
     public function getUserByEmail($email)
     {
         $user = $this->userModel->where('email', $email)->first();

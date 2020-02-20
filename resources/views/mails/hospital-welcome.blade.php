@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Medom - Password - Reset</title>
+    <title>Medom - New Booking</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
     <style>
         .default-color {
@@ -31,7 +31,7 @@
                    bgcolor="#ffffff">
                 <tr>
                     <td style="text-align: center; vertical-align: top;">
-                        <img src="{{ asset('/images/about-img.jpg') }}" alt="Medom Logo"
+                        <img src="{{ asset('/images/logo.png') }}" alt="Medom Logo"
                              style="border:none; display:inline-block;" height="60">
                     </td>
                 </tr>
@@ -41,32 +41,15 @@
 
 
                 <tr>
-                    <td style="padding-top: 10px; font-weight: 300; line-height: 36px; font-size: 18px; font-family: 'Open Sans',Helvetica,Arial,sans-serif; color: #666; letter-spacing: -1px; text-align:center;">
-                        <p class="default-color"><b>Dear {{$user->fullname()}},</b></p>
-                            <p>A Request to Reset Paasword Was Sent to us</p>
-                            <p>Please click on the link below..</p>
-                            <a href="https://www.medom.com/reset-password/{{$token}}" id="reset-btn">Reset Password</a>
-
-                        {{--  </p>  --}}
+                    <td style="padding-top: 10px; font-weight: 300; line-height: 36px; font-size: 18px; font-family: 'Open Sans',Helvetica,Arial,sans-serif; color: #666; letter-spacing: -1px;">
+                        <p class="default-color"><b>Dear {{$user->first_name}},</b></p>
+                        <p>Thank you for signing up. Your account was created successfully , your default password is  <b>{{$password}}</b>
+                        </p>
                     </td>
                 </tr>
 
 
                 <style>
-                    #reset-btn{
-                        background-color:red;
-                        color:white;
-                        padding:0.6em 3.5em;
-                        border-radius:4px;
-                        /* margin */
-                        text-decoration:none;
-                        text-transform:uppercase;
-                        margin:auto auto;
-                        text-align:center;
-                        align-self:center;
-                        justify-content:center;
-                        width:100%;
-                    }
                     .flight-header {
                         margin: 0;
                         padding: 0;
@@ -118,7 +101,7 @@
                 </style>
 
                 <tr>
-                    <td style="padding-top: 10px; font-weight: 300; line-height: 36px; font-size: 14px; font-family: 'Open Sans',Helvetica,Arial,sans-serif; color: #555; letter-spacing: -1px; text-align:center;">
+                    <td style="padding-top: 10px; font-weight: 300; line-height: 36px; font-size: 14px; font-family: 'Open Sans',Helvetica,Arial,sans-serif; color: #555; letter-spacing: -1px;">
 
 
                         <style>
@@ -133,8 +116,8 @@
                 </tr>
 
                 <tr>
-                    <td style="text-align:center;">
-                        <p>If You did not request this, no further action is required</p>
+                    <td>
+                        <p>Thank you for joining us</p>
                         <br>
 
                         <p><b>Medom Support Team</b></p>

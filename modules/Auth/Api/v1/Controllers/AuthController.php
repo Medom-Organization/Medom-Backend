@@ -29,6 +29,7 @@ class AuthController extends BaseController
             return $this->fail("Invalid login credentials");
         }
         $userType = $this->getUserType($request['email']);
+        // to check if the user works with a hospital 
         if ($userType) {
             $data = [
                 'token' => $token,
@@ -45,16 +46,17 @@ class AuthController extends BaseController
         return $this->success($data);
     }
 
+
     public function getUserType($email)
     {
         return $this->authRepo->getUserType($email);
     }
+
+
     public function registerUser(RegistrationRequest $request)
     {
 
         $this->validate($request, [
-
-            // 'po' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
@@ -91,6 +93,8 @@ class AuthController extends BaseController
 
         return $this->error("Unable to update user profile");
     }
+
+
     public function updateProfile(UpdateProfileRequest $request)
     {
         $user = $this->authRepo->updateProfile($request->all());
