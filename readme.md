@@ -3,7 +3,7 @@ Medom is a Platform to reduce the hassles of file management in hospitals
 # Setup
 1 Clone the project
 
-2 Create a **.env** file
+2 Create a ```**.env**``` file
 
 3 Copy and paste contents from *.env.example* to *.env* file
 
@@ -11,5 +11,5 @@ Medom is a Platform to reduce the hassles of file management in hospitals
 
 5 Run Migrations and seed
 
-6 Run **php artisan serve**
+6 Run ```**php artisan serve**```
 

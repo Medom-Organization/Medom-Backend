@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Medom\Mail\OrderCreationMailable;
 use Medom\Modules\Auth\Api\v1\Repositories\AuthRepository;
+use Medom\Modules\Auth\Models\Profile;
 use Medom\Modules\BaseRepository;
 use Medom\Modules\Booking\Models\Order;
 use Medom\Modules\Booking\Models\Payment;
