@@ -57,7 +57,7 @@ class AuthRepository extends BaseRepository
         if (!$role_id)
             $role = $this->roleModel->where('name', 'user')->first();
         $role_id = $role->id;
-        return $this->InsertUser($data,$role,$profile_picture);
+        return $this->InsertUser($data, $role, $profile_picture);
     }
 
     public function createHospital($data, $profile_picture, $logo, $role_id = null)
@@ -69,7 +69,7 @@ class AuthRepository extends BaseRepository
             if (!$role_id) {
                 $role = $this->roleModel->where('name', 'hospitaladmin')->first();
             }
-            $user = $this->InsertUser($data,$role,$profile_picture);
+            $user = $this->InsertUser($data, $role, $profile_picture);
             if ($user) {
                 $hospital = $this->hospitalModel->create([
                     'hospital_id' => $this->generateUuid(),
@@ -85,18 +85,18 @@ class AuthRepository extends BaseRepository
                 $hospitalstaff = $this->hospitalStaffModel->create([
                     'user_id' => $user->id,
                     'hospital_id' => $hospital->hospital_id,
-                    'role_id' => $role_id
+                    'role_id' => $role->id
                 ]);
                 $hospitalAdmin = $this->hospitalAdminModel->create([
                     'user_id' => $user->id,
                     'hospital_id' => $hospital->hospital_id,
-                    'role_id' => $role_id
+                    'role_id' => $role->id
                 ]);
             }
             if (!$user)
                 return false;
 
-            $this->sendHospitalWelcomeEmail($user, $data['password']);
+            // $this->sendHospitalWelcomeEmail($user, $data['password']);
             return array('user' => $user, 'hospital' => $hospital);
         } else {
             return false;
@@ -151,7 +151,7 @@ class AuthRepository extends BaseRepository
         $user = $this->userModel->where('email', $email)->first();
         return $user;
     }
-    public function InsertUser($data,$role,$profile_picture)
+    public function InsertUser($data, $role, $profile_picture)
     {
         $user = $this->userModel->create([
             'id' => $this->generateUuid(),
@@ -175,7 +175,7 @@ class AuthRepository extends BaseRepository
         if (!$user)
             return false;
 
-        $this->sendWelcomeEmail($user, $data['password']);
+        //$this->sendWelcomeEmail($user, $data['password']);
         return $user;
     }
 }
