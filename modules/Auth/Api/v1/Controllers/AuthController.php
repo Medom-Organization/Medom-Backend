@@ -58,7 +58,8 @@ class AuthController extends BaseController
         if(isset($request->profile_picture)){
         $profile_picture = $request->profile_picture->store('profiles', 'public');
         $user = $this->authRepo->createUser($request, $profile_picture);
-        return $user;
+        // return $user;
+        return $this->transform($user, $this->userTransformer);
         }
         else{
             $user = $this->authRepo->createUser($request);
