@@ -55,15 +55,15 @@ class AuthController extends BaseController
 
     public function registerUser(RegistrationRequest $request)
     {
-        if(isset($request->profile_picture)){
-        $profile_picture = $request->profile_picture->store('profiles', 'public');
-        $user = $this->authRepo->createUser($request, $profile_picture);
-        // return $user;
-        return $this->transform($user, $this->userTransformer);
-        }
-        else{
+        if (isset($request->profile_picture)) {
+            $profile_picture = $request->profile_picture->store('profiles', 'public');
+            $user = $this->authRepo->createUser($request, $profile_picture);
+            // return $user;
+            return $this->transform($user, $this->userTransformer);
+        } else {
             $user = $this->authRepo->createUser($request);
-            return $user;
+            // return $user;
+            return $this->transform($user, $this->userTransformer);
         }
     }
     public function registerHospital(HospitalRegistrationRequest $request)

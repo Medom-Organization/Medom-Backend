@@ -29,7 +29,7 @@ class RegistrationRequest extends FormRequest
             'other_names' =>'required',
             'email' => 'required|email',
             'password' => 'required',
-            'profile_picture' => 'required'
+            // 'profile_picture' => 'required'
         ];
     }
 
