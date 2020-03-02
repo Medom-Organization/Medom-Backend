@@ -153,6 +153,9 @@ class AuthRepository extends BaseRepository
     }
     public function InsertUser($data, $role, $profile_picture)
     {
+        if($profile_picture==null){
+            $profile_picture='profiles/profile.png.2018-04-24.1524590440.png';
+        }
         $user = $this->userModel->create([
             'id' => $this->generateUuid(),
             'email' => $data['email'],
