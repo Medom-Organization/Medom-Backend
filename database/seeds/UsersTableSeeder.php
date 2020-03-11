@@ -5,6 +5,7 @@ use Medom\Modules\Auth\Models\Role;
 use Medom\Modules\Auth\Models\User;
 use Medom\Modules\Auth\Models\Profile;
 use Ramsey\Uuid\Uuid;
+use Medom\Modules\Auth\Api\v1\Repositories\AuthRepository;
 
 class UsersTableSeeder extends Seeder
 {
@@ -45,10 +46,13 @@ class UsersTableSeeder extends Seeder
 
         // Seeding users
         echo "Seeding Users Started" . PHP_EOL;
+        $this->authRepo=new AuthRepository;
+        // echo $this->authRepo->generateUniqueId('mabadejedaniel1@medom.ng');
         $superadmin = Role::where('name', 'superadmin')->first();
         $user = User::updateOrCreate(
             [
                 'id' => Uuid::uuid4()->toString(),
+                'uniqueId'=>$this->authRepo->generateUniqueId('mabadejedaniel1@medom.ng'),
                 'first_name' => 'Daniel',
                 'surname' => "Mabadeje",
                 'role_id' => $superadmin->id,
@@ -67,6 +71,7 @@ class UsersTableSeeder extends Seeder
         $user = User::updateOrCreate(
             [
                 'id' => Uuid::uuid4()->toString(),
+                'uniqueId'=>$this->authRepo->generateUniqueId('superadmin@medom.ng'),
                 'first_name' => 'SuperAdmin',
                 'surname' => "User",
                 'role_id' => $superadmin->id,
