@@ -57,6 +57,8 @@ class AuthRepository extends BaseRepository
         if (!$role_id)
             $role = $this->roleModel->where('name', 'user')->first();
         $role_id = $role->id;
+        $data->uniqueId=$this->generateUniqueId($data);
+        dd($data->uniqueId);
         return $this->InsertUser($data, $role, $profile_picture);
     }
 
@@ -145,6 +147,15 @@ class AuthRepository extends BaseRepository
         }
     }
 
+    public function generateUniqueId( $data )
+    {
+        $charset=$data->email;
+        $unique=substr(str_shuffle(uniqid()),0,4);
+        // rand(0000, 9999);
+        return date('ymd').substr($charset, 0, 4). $unique;
+        // return uniqid(date('ymd').substr($charset, 0, 4));
+        // return uniqid(substr($charset, 0, 4), false );
+    }
     //get by email
     public function getUserByEmail($email)
     {
