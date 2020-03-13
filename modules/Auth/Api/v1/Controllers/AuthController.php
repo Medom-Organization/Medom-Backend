@@ -24,6 +24,11 @@ class AuthController extends BaseController
 
     public function login(LoginRequest $request)
     {
+        // dd($request['email']);
+        $email=$this->getUserEmail($request['email']);
+        $request['email']=$email[0]->email;
+        // dd($request->only('email', 'password'));
+        // die($email[0]->email);
         $credentials = $request->only('email', 'password');
         if (!$token = auth()->attempt($credentials)) {
             return $this->fail("Invalid login credentials");
@@ -52,7 +57,10 @@ class AuthController extends BaseController
         return $this->authRepo->getUserType($email);
     }
 
-
+    public function getUserEmail($data)
+    {
+        return $this->authRepo->getUserEmail($data);
+    }
     public function registerUser(RegistrationRequest $request)
     {
         if (isset($request->profile_picture)) {

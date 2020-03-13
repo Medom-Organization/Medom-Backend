@@ -27,7 +27,7 @@ class User extends Model implements
      * @var array
      */
 
-    protected $fillable = ['id', 'uniqueId', 'first_name', 'other_names', 'surname', 'email', 'role_id', 'password', 'role', 'profile_picture', ];
+    protected $fillable = ['id', 'uniqueId', 'first_name', 'other_names', 'surname', 'email', 'role_id', 'password', 'role', 'profile_picture','phone_number', ];
     protected $hidden = ['password'];
     protected $with = ['role'];
 

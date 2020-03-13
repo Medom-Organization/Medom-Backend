@@ -51,14 +51,26 @@ class AuthRepository extends BaseRepository
             return false;
         }
     }
+    public function getUserEmail($data){
+        $datas=$this->userModel->where('email', $data)
+                             ->orWhere('uniqueId', $data)
+                             ->orWhere('phone_number', $data)
+                             ->select('email')
+                             ->get();
+                            //   ;
+        // dd($datas);
+        // var_dump($datas);
+        // die;
+        return  $datas;
+    }
 
     public function createUser($data, $profile_picture = null, $role_id = null)
     {
         if (!$role_id)
             $role = $this->roleModel->where('name', 'user')->first();
         $role_id = $role->id;
-        $data->uniqueId=$this->generateUniqueId($data->email);
-        dd($data->uniqueId);
+        $data->uniqueId = $this->generateUniqueId($data->email);
+        // dd($data->uniqueId);
         return $this->InsertUser($data, $role, $profile_picture);
     }
 
@@ -71,6 +83,7 @@ class AuthRepository extends BaseRepository
             if (!$role_id) {
                 $role = $this->roleModel->where('name', 'hospitaladmin')->first();
             }
+            $data->uniqueId = $this->generateUniqueId($data->email);
             $user = $this->InsertUser($data, $role, $profile_picture);
             if ($user) {
                 $hospital = $this->hospitalModel->create([
@@ -147,12 +160,12 @@ class AuthRepository extends BaseRepository
         }
     }
 
-    public function generateUniqueId( $data )
+    public function generateUniqueId($data)
     {
-        $charset=$data;
-        $unique=substr(str_shuffle(uniqid()),0,4);
+        $charset = $data;
+        $unique = substr(str_shuffle(uniqid()), 0, 4);
         // rand(0000, 9999);
-        return date('ymd').substr($charset, 0, 4). $unique;
+        return date('ymd') . substr($charset, 0, 4) . $unique;
         // return uniqid(date('ymd').substr($charset, 0, 4));
         // return uniqid(substr($charset, 0, 4), false );
     }
@@ -164,19 +177,20 @@ class AuthRepository extends BaseRepository
     }
     public function InsertUser($data, $role, $profile_picture)
     {
-        if($profile_picture==null){
-            $profile_picture='profiles/profile.png.2018-04-24.1524590440.png';
+        if ($profile_picture == null) {
+            $profile_picture = 'profiles/profile.png.2018-04-24.1524590440.png';
         }
+        // dd($data->first_name);
         $user = $this->userModel->create([
             'id' => $this->generateUuid(),
-            'uniqueId'=>$data['uniqueId']
-            'email' => $data['email'],
-            'first_name' => $data['first_name'],
-            'other_names' => $data['other_names'],
-            'surname' => $data['surname'],
+            'uniqueId' => $data->uniqueId,
+            'email' => $data->email,
+            'first_name' => $data->first_name,
+            'other_names' => $data->other_names,
+            'surname' => $data->surname,
             'role_id' => $role->id,
             'role' => $role->name,
-            'password' => bcrypt($data['password']),
+            'password' => bcrypt($data->password),
             'profile_picture' => $profile_picture
         ]);
         $profile = $this->profileModel->create([
