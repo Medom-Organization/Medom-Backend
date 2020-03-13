@@ -24,11 +24,8 @@ class AuthController extends BaseController
 
     public function login(LoginRequest $request)
     {
-        // dd($request['email']);
         $email=$this->getUserEmail($request['email']);
         $request['email']=$email[0]->email;
-        // dd($request->only('email', 'password'));
-        // die($email[0]->email);
         $credentials = $request->only('email', 'password');
         if (!$token = auth()->attempt($credentials)) {
             return $this->fail("Invalid login credentials");
